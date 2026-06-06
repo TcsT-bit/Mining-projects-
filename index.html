@@ -26,12 +26,11 @@ header{
 .header-text h2{margin:0;font-size:1.4rem}
 .header-text small{opacity:0.9}
 .contact-line{font-size:0.9rem;margin-top:4px}
-.btn-group{position:absolute;right:15px;top:50%;transform:translateY(-50%);display:flex;gap:8px}
-.download-btn,.login-btn{
+.download-btn{
+  position:absolute;right:15px;top:50%;transform:translateY(-50%);
   background:var(--gold);color:var(--black);border:none;padding:8px 14px;
   border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.9rem
 }
-.login-btn{background:#fff}
 nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
 nav button{flex:0 0 auto;padding:10px 16px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap;font-weight:600}
 nav button.active{background:var(--green);color:#fff}
@@ -39,7 +38,6 @@ nav button.active{background:var(--green);color:#fff}
 .card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,0.1);border-top:4px solid var(--gold)}
 h3{color:var(--blue);margin-top:0}
 h4{color:var(--green);margin:14px 0 6px 0}
-ul{margin:8px 0 8px 20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .stat-card{background:#f8f9fa;padding:12px;border-radius:8px;text-align:center}
 .stat-card h3{margin:0;font-size:28px;color:var(--green)}
@@ -47,7 +45,6 @@ ul{margin:8px 0 8px 20px}
 .status.compliant,.status.paid{background:#d4edda;color:#155724}
 .status.warning,.status.pending{background:#fff3cd;color:#856404}
 .status.info,.status.approved{background:#d1ecf1;color:#0c5460}
-.status.overdue,.status.failed{background:#f8d7da;color:#721c24}
 table{width:100%;border-collapse:collapse;margin-top:12px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 th{background:#f8f9fa;color:var(--blue)}
@@ -70,7 +67,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 .progress-fill{height:100%;background:var(--green);transition:width 0.3s}
 @media (max-width:600px){
 .header-content{flex-direction:column;gap:8px}
-.btn-group{position:static;transform:none;margin-top:10px}
+.download-btn{position:static;transform:none;margin-top:10px}
  table{font-size:0.85rem}
  th,td{padding:8px}
 </style>
@@ -85,10 +82,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div class="contact-line">Email: twinz.cooperate.services@gmail.com</div>
     </div>
   </div>
-  <div class="btn-group">
-    <button class="login-btn" id="loginBtn" onclick="openLogin()">Admin Login</button>
-    <button class="download-btn" onclick="window.print()">Export PDF</button>
-  </div>
+  <button class="download-btn" onclick="window.print()">Export PDF</button>
 </header>
 
 <nav>
@@ -110,7 +104,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div class="stat-card"><h3 id="activeProjects">0</h3><small>Active Projects</small></div>
       <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Verified Suppliers</small></div>
       <div class="stat-card"><h3 id="paidOut">R0</h3><small>Paid to SMMEs</small></div>
-      <div class="stat-card"><h3 id="localSpend">0%</h3><small>Local Spend</small></div>
+      <div class="stat-card"><h3 id="localSpend">80%</h3><small>Local Spend</small></div>
     </div>
     <div class="chart-container"><canvas id="spendChart"></canvas></div>
     <div class="alert-info">Data updates in real-time. All records are open for verification.</div>
@@ -129,11 +123,9 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <div id="projects" class="tab hidden">
   <div class="card">
     <h3>Project Tracking</h3>
-    <div id="projectAdmin" class="hidden">
-      <div class="action-bar">
-        <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
-        <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
-      </div>
+    <div class="action-bar">
+      <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
+      <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
     </div>
     <table id="projectsTable">
       <thead><tr><th>Project</th><th>Client</th><th>Value</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
@@ -146,11 +138,9 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <div id="suppliers" class="tab hidden">
   <div class="card">
     <h3>Supplier Management</h3>
-    <div id="supplierAdmin" class="hidden">
-      <div class="action-bar">
-        <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
-        <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
-      </div>
+    <div class="action-bar">
+      <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
+      <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
     </div>
     <table id="suppliersTable">
       <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th><th>Actions</th></tr></thead>
@@ -163,14 +153,12 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <div id="payments" class="tab hidden">
   <div class="card">
     <h3>Payment Tracker</h3>
-    <div id="paymentAdmin" class="hidden">
-      <div class="action-bar">
-        <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
-        <button class="btn-secondary" onclick="exportCSV('payments')">Export CSV</button>
-      </div>
+    <div class="action-bar">
+      <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
+      <button class="btn-secondary" onclick="exportCSV('payments')">Export CSV</button>
     </div>
     <table id="paymentsTable">
-      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th></tr></thead>
+      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th><th>Actions</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -256,18 +244,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-<div id="loginModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('loginModal')"></div>
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <h3>Admin Login</h3>
-    <p>Use: admin / twinz2026</p>
-    <input type="text" id="username" placeholder="Username" style="width:100%;margin:10px 0">
-    <input type="password" id="password" placeholder="Password" style="width:100%;margin:10px 0">
-    <button type="button" class="btn-primary" onclick="login()" style="width:100%">Login</button>
-    <button type="button" onclick="closeModal('loginModal')" style="width:100%;margin-top:10px">Cancel</button>
-  </div>
-</div>
-
 <footer style="text-align:center;padding:20px;color:#666;font-size:0.9rem">
   © 2026 Twinz Cooperate Services (Pty) Ltd. Reg No: 2024/444303/07<br>
   Directors: Nkuna Thabang Given, Nkuna Thabo Johannes<br>
@@ -275,7 +251,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 </footer>
 
 <script>
-let isAdmin=false;
 let spendChart=null;
 
 if(!localStorage.getItem('twinz_projects')){
@@ -325,7 +300,6 @@ function renderStats(){
   document.getElementById('activeSuppliers').textContent=suppliers.length;
   const paid=payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
   document.getElementById('paidOut').textContent='R'+paid.toLocaleString();
-  document.getElementById('localSpend').textContent='80%';
 }
 
 function renderProjects(){
@@ -335,7 +309,7 @@ function renderProjects(){
       <td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td>
       <td><div class="progress-bar"><div class="progress-fill" style="width:${p.progress}%"></div></div> ${p.progress}%</td>
       <td><span class="status approved">${p.status}</span></td>
-      <td>${isAdmin?`<button class="btn-danger" onclick="deleteItem('projects',${p.id})">Delete</button>`:''}</td>
+      <td><button class="btn-danger" onclick="deleteItem('projects',${p.id})">Delete</button></td>
     </tr>
   `).join('');
 }
@@ -346,7 +320,7 @@ function renderSuppliers(){
     <tr>
       <td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td><span class="badge">${s.cidb}</span></td>
       <td><span class="status compliant">${s.status}</span></td>
-      <td>${isAdmin?`<button class="btn-danger" onclick="deleteItem('suppliers',${s.id})">Delete</button>`:''}</td>
+      <td><button class="btn-danger" onclick="deleteItem('suppliers',${s.id})">Delete</button></td>
     </tr>
   `).join('');
 }
@@ -363,6 +337,7 @@ function renderPayments(){
       <td>R${p.amount.toLocaleString()}</td>
       <td><span class="status ${p.status}">${p.status}</span></td>
       <td>${p.proof||'-'}</td>
+      <td><button class="btn-danger" onclick="deleteItem('payments',${p.id})">Delete</button></td>
     </tr>`;
   }).join('');
 }
@@ -391,7 +366,6 @@ function renderChart(){
   });
 }
 
-function openLogin(){closeAllModals();document.getElementById('loginModal').classList.remove('hidden')}
 function openProjectModal(){closeAllModals();document.getElementById('projectModal').classList.remove('hidden')}
 function openSupplierModal(){closeAllModals();document.getElementById('supplierModal').classList.remove('hidden')}
 function openPaymentModal(){
@@ -408,21 +382,6 @@ function closeModal(id){
   if(!modal)return;
   modal.classList.add('hidden');
   modal.querySelectorAll('input,select,textarea').forEach(el=>{if(el.tagName==='SELECT')el.selectedIndex=0;else el.value=''});
-}
-
-function login(){
-  const u=document.getElementById('username').value;
-  const p=document.getElementById('password').value;
-  if(u==='admin'&&p==='twinz2026'){
-    isAdmin=true;
-    document.getElementById('loginBtn').textContent='Logout';
-    document.getElementById('projectAdmin').classList.remove('hidden');
-    document.getElementById('supplierAdmin').classList.remove('hidden');
-    document.getElementById('paymentAdmin').classList.remove('hidden');
-    closeModal('loginModal');
-    alert('Admin login successful');
-  }else if(u){alert('Invalid credentials')}
-  renderAll();
 }
 
 function addProject(){
@@ -460,6 +419,7 @@ function deleteItem(type,id){
 
 function exportCSV(type){
   const data=JSON.parse(localStorage.getItem('twinz_'+type));
+  if(!data.length){alert('No data to export');return;}
   const csv=[Object.keys(data[0]).join(','),...data.map(r=>Object.values(r).join(','))].join('\n');
   const blob=new Blob([csv],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
