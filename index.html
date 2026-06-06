@@ -64,19 +64,21 @@ tr:hover{background:#fafafa}
 .guarantee-box{background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0}
 .checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
 .checklist-item input{width:auto;margin:0}
-.map-container{height:200px;background:#e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666;margin-top:10px}
 .signature{margin-top:40px}
 .signature div{margin-top:30px;width:300px;border-top:1px solid #000}
 .challenge-box{background:#0a3d62;color:#fff;padding:15px;border-radius:8px;margin:15px 0;font-weight:bold}
 .mission-box{background:#fff3cd;border-left:4px solid var(--gold);padding:15px;margin:15px 0}
 .small-note{font-size:0.85rem;color:var(--muted);margin-top:8px}
 .problem-table th{background:#0a3d62;color:#fff}
-.letter-template{border:1px dashed #ccc;padding:20px;background:#fafafa;margin-top:15px}
+.letter-template,.doc-template{border:1px dashed #ccc;padding:20px;background:#fafafa;margin-top:15px}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{padding:6px 0;border-bottom:1px solid #eee}
+.checklist li:before{content:"☐";margin-right:10px;font-size:14pt;color:#007A4D}
 
 @media print {
   header, nav,.download-btn {display:none}
   body{margin:0;background:#fff}
-.card{box-shadow:none;border:1px solid #ddd}
+ .card{box-shadow:none;border:1px solid #ddd}
   @page {margin:20mm}
 }
 
@@ -108,6 +110,7 @@ tr:hover{background:#fafafa}
   <button onclick="showTab('partners')">Partners</button>
   <button onclick="showTab('partnerletter')">Partner Letter</button>
   <button onclick="showTab('compliance')">Compliance</button>
+  <button onclick="showTab('qa')">QA Docs</button>
   <button onclick="showTab('code')">Guarantee</button>
 </nav>
 
@@ -376,11 +379,53 @@ tr:hover{background:#fafafa}
       <input type="checkbox" checked disabled>
       <label>Partner Contractor Network: CIDB 6+ Available for Execution</label>
     </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Supplier Vetting Protocol: SABS certs, insurance, references verified</label>
+    </div>
 
     <div class="status compliant" style="margin-top:16px">Ready for Immediate Mine Vendor Verification</div>
 
     <div class="guarantee-box">
       <strong>Verification Challenge:</strong> Email us. We’ll provide CIPC, SARS, CIDB, bank, and partner contractor letters within 24 hours. If we can’t, you walk away.
+    </div>
+  </div>
+</div>
+
+<div id="qa" class="tab hidden">
+  <div class="card">
+    <h3>Quality Assurance Documentation</h3>
+    <p>Print these documents to use with suppliers and mines. They prove we manage risk, not just resell equipment.</p>
+
+    <div class="doc-template">
+      <h4>Supplier Vetting Checklist</h4>
+      <ul class="checklist">
+        <li>CIPC registration active and verified</li>
+        <li>Tax clearance / SARS good standing certificate valid</li>
+        <li>B-BBEE certificate or sworn affidavit</li>
+        <li>Products have valid SABS/SANS certificates</li>
+        <li>Manufacturer warranty minimum 12 months</li>
+        <li>Product liability insurance minimum R2,000,000</li>
+        <li>30-day trading terms or bank letter</li>
+        <li>Written confirmation of stock and lead time</li>
+        <li>2 recent client references verified</li>
+        <li>Tax invoice, delivery note, SABS certs provided for audit</li>
+      </ul>
+      <button class="btn-primary" onclick="window.print()">Print Checklist</button>
+    </div>
+
+    <div class="doc-template" style="margin-top:25px">
+      <h4>Supplier Agreement - Key Clause 7</h4>
+      <p><strong>7.1 Standards & Certification:</strong> Goods shall conform to BOQ spec and comply with SANS/SABS standards. Valid certificates provided on delivery.</p>
+      <p><strong>7.2 Inspection & Rejection:</strong> Goods failing spec may be rejected within 7 days. Supplier replaces at own cost within 14 days.</p>
+      <p><strong>7.3 Warranty:</strong> Minimum 12-month defects liability. Defects rectified at no cost within 14 days.</p>
+      <p><strong>7.4 Liability & Indemnity:</strong> Supplier indemnifies Twinz against claims from defective goods. Product liability insurance required.</p>
+      <p><strong>7.5 Payment Hold:</strong> Twinz may withhold payment for defective goods until rectified. Recovery costs recoverable from Supplier.</p>
+      <button class="btn-primary" onclick="alert('Full supplier agreement template available. Contact twinz.cooperate.services@gmail.com')">View Full Agreement</button>
+    </div>
+
+    <div class="guarantee-box" style="margin-top:20px">
+      <strong>Why this matters:</strong> Mines get burned by fake steel and failed school furniture. We vet suppliers, check certs, take delivery photos, and give you the full audit pack. If it fails, we chase the supplier.
     </div>
   </div>
 </div>
