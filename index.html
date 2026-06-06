@@ -62,17 +62,16 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 .progress-bar{width:100%;height:20px;background:#e9ecef;border-radius:10px;overflow:hidden}
 .progress-fill{height:100%;background:var(--green);transition:width 0.3s}
 
-/* FIXED: Closed both media queries properly */
 @media print {
   header, nav,.download-btn {display:none}
   body{margin:0;background:#fff}
- .card{box-shadow:none;border:1px solid #ddd}
+.card{box-shadow:none;border:1px solid #ddd}
   @page {margin:20mm}
 }
 
 @media (max-width:600px){
- .header-content{flex-direction:column;gap:8px}
- .download-btn{position:static;transform:none;margin-top:10px}
+.header-content{flex-direction:column;gap:8px}
+.download-btn{position:static;transform:none;margin-top:10px}
   table{font-size:0.85rem}
   th,td{padding:8px}
 </style>
@@ -130,13 +129,13 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 <div id="suppliers" class="tab hidden">
   <div class="card">
-    <h3>Supplier Management</h3>
+    <h3>Supplier Directory</h3>
+    <p>Verified suppliers working on SLP projects. Contact us to update this list.</p>
     <div class="action-bar">
-      <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
       <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
     </div>
     <table id="suppliersTable">
-      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -205,19 +204,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
     <input type="number" id="pProgress" placeholder="Progress %" min="0" max="100" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
     <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
-  </div>
-</div>
-
-<div id="supplierModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('supplierModal')"></div>
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <h3>Add Supplier</h3>
-    <input type="text" id="sName" placeholder="Company Name" style="width:100%;margin:8px 0">
-    <input type="text" id="sService" placeholder="Service" style="width:100%;margin:8px 0">
-    <input type="text" id="sArea" placeholder="Area" style="width:100%;margin:8px 0">
-    <input type="text" id="sCidb" placeholder="CIDB Grade" style="width:100%;margin:8px 0">
-    <button type="button" class="btn-primary" onclick="addSupplier()" style="width:100%">Save Supplier</button>
-    <button type="button" onclick="closeModal('supplierModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
@@ -291,7 +277,6 @@ function renderSuppliers(){
     <tr>
       <td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td><span class="badge">${s.cidb}</span></td>
       <td><span class="status compliant">${s.status}</span></td>
-      <td><button class="btn-danger" onclick="deleteItem('suppliers',${s.id})">Delete</button></td>
     </tr>
   `).join('');
 }
@@ -327,7 +312,6 @@ function renderChart(){
 }
 
 function openProjectModal(){closeAllModals();document.getElementById('projectModal').classList.remove('hidden')}
-function openSupplierModal(){closeAllModals();document.getElementById('supplierModal').classList.remove('hidden')}
 function openPaymentModal(){
   closeAllModals();
   const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
@@ -349,13 +333,6 @@ function addProject(){
   projects.push({id:Date.now(),name:document.getElementById('pName').value,client:document.getElementById('pClient').value,value:parseInt(document.getElementById('pValue').value),progress:parseInt(document.getElementById('pProgress').value),status:'active'});
   localStorage.setItem('twinz_projects',JSON.stringify(projects));
   closeModal('projectModal');renderAll();
-}
-
-function addSupplier(){
-  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
-  suppliers.push({id:Date.now(),name:document.getElementById('sName').value,service:document.getElementById('sService').value,area:document.getElementById('sArea').value,cidb:document.getElementById('sCidb').value,status:'verified'});
-  localStorage.setItem('twinz_suppliers',JSON.stringify(suppliers));
-  closeModal('supplierModal');renderAll();
 }
 
 function addPayment(){
@@ -381,7 +358,7 @@ function exportCSV(type){
   const data=JSON.parse(localStorage.getItem('twinz_'+type));
   if(!data.length){alert('No data to export');return;}
   const csv=[Object.keys(data[0]).join(','),...data.map(r=>Object.values(r).join(','))].join('\n');
-  const blob=new Blob([csv],{type:'text/cssv'});
+  const blob=new Blob([csv],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
   a.href=url;a.download=type+'_'+new Date().toISOString().split('T')[0]+'.csv';
