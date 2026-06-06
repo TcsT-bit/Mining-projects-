@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twinz Cooperate Services - MineSLP Compliance & Tracking Portal</title>
-<meta property="og:title" content="Twinz Cooperate Services - Mining SLP Compliance Partner">
-<meta property="og:description" content="Compliant, transparent, and partner-focused for mining SLP projects in Limpopo.">
-<meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
-<link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
@@ -65,11 +61,20 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 .badge{display:inline-block;padding:4px 10px;background:#e9ecef;border-radius:20px;font-size:0.8rem;margin-right:5px}
 .progress-bar{width:100%;height:20px;background:#e9ecef;border-radius:10px;overflow:hidden}
 .progress-fill{height:100%;background:var(--green);transition:width 0.3s}
+
+/* FIXED: Closed both media queries properly */
+@media print {
+  header, nav,.download-btn {display:none}
+  body{margin:0;background:#fff}
+ .card{box-shadow:none;border:1px solid #ddd}
+  @page {margin:20mm}
+}
+
 @media (max-width:600px){
-.header-content{flex-direction:column;gap:8px}
-.download-btn{position:static;transform:none;margin-top:10px}
- table{font-size:0.85rem}
- th,td{padding:8px}
+ .header-content{flex-direction:column;gap:8px}
+ .download-btn{position:static;transform:none;margin-top:10px}
+  table{font-size:0.85rem}
+  th,td{padding:8px}
 </style>
 </head>
 <body>
@@ -96,7 +101,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 <div class="container">
 
-<!-- DASHBOARD -->
 <div id="dashboard" class="tab">
   <div class="card">
     <h3><span class="live-indicator"></span> Live SLP Dashboard</h3>
@@ -107,19 +111,9 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div class="stat-card"><h3 id="localSpend">80%</h3><small>Local Spend</small></div>
     </div>
     <div class="chart-container"><canvas id="spendChart"></canvas></div>
-    <div class="alert-info">Data updates in real-time. All records are open for verification.</div>
-  </div>
-
-  <div class="card">
-    <h3>Recent Activity</h3>
-    <table id="activityTable">
-      <thead><tr><th>Date</th><th>Project</th><th>Activity</th><th>Status</th></tr></thead>
-      <tbody></tbody>
-    </table>
   </div>
 </div>
 
-<!-- PROJECTS -->
 <div id="projects" class="tab hidden">
   <div class="card">
     <h3>Project Tracking</h3>
@@ -134,7 +128,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-<!-- SUPPLIERS -->
 <div id="suppliers" class="tab hidden">
   <div class="card">
     <h3>Supplier Management</h3>
@@ -149,7 +142,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-<!-- PAYMENTS -->
 <div id="payments" class="tab hidden">
   <div class="card">
     <h3>Payment Tracker</h3>
@@ -164,7 +156,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-<!-- COMPLIANCE -->
 <div id="compliance" class="tab hidden">
   <div class="card">
     <h3>Compliance Status</h3>
@@ -173,29 +164,15 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div><input type="checkbox" checked disabled> Tax/VAT Compliant: 9819040198</div>
       <div><input type="checkbox" checked disabled> CIDB Registration: Active</div>
       <div><input type="checkbox" checked disabled> COIDA: Letter of Good Standing</div>
-      <div><input type="checkbox" checked disabled> Banking: Standard Bank Verified</div>
-      <div><input type="checkbox" checked disabled> QMS: In Place</div>
     </div>
     <div class="status compliant" style="margin-top:16px">Ready for Mine Vendor Verification</div>
   </div>
 </div>
 
-<!-- CODE OF PRACTICE -->
 <div id="code" class="tab hidden">
   <div class="card">
-    <h3>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h3>
-    <h4>1. Purpose</h4>
+    <h3>Mining SLP Projects – Code of Practice</h3>
     <p>This code commits <strong>Twinz Cooperate Services (Pty) Ltd</strong> to delivering all mining SLP projects to standard, on time, with full transparency.</p>
-    <h4>2. Quality & Technical Standards</h4>
-    <ul><li>Work to approved spec, BOQ, SANS standards</li><li>No material substitution without approval</li><li>All testing by SANAS-accredited labs</li></ul>
-    <h4>3. Transparency & Documentation</h4>
-    <ul><li>Weekly progress reports, delivery notes, test results</li><li>Open project file for client and community oversight</li><li>Payment claims supported by evidence</li></ul>
-    <h4>4. Anti-Corruption & Ethics</h4>
-    <ul><li>Zero tolerance for bribes and collusion</li><li>Pricing based on actual cost + fair margin</li><li>Full compliance with MHSA, OHSA, CIDB</li></ul>
-    <h4>5. Guarantee</h4>
-    <div style="background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0">
-      <p>If we fail to deliver, we notify 14 days in advance, allow performance guarantee call-up, hand over all records, and rectify defects at our cost.</p>
-    </div>
   </div>
 </div>
 
@@ -255,21 +232,16 @@ let spendChart=null;
 
 if(!localStorage.getItem('twinz_projects')){
   localStorage.setItem('twinz_projects', JSON.stringify([
-    {id:1,name:'Community Fence - Mine A',client:'Mine A',value:850000,progress:60,status:'active'},
-    {id:2,name:'Water Pipeline - Mine B',client:'Mine B',value:1200000,progress:30,status:'active'}
+    {id:1,name:'Community Fence - Mine A',client:'Mine A',value:850000,progress:60,status:'active'}
   ]));
 }
 if(!localStorage.getItem('twinz_suppliers')){
   localStorage.setItem('twinz_suppliers', JSON.stringify([
-    {id:1,name:'Limpopo Civils',service:'Civil Works',area:'Polokwane',cidb:'5CE',status:'verified'},
-    {id:2,name:'Water Tech SMME',service:'Boreholes',area:'Mokopane',cidb:'3CE',status:'verified'}
+    {id:1,name:'Limpopo Civils',service:'Civil Works',area:'Polokwane',cidb:'5CE',status:'verified'}
   ]));
 }
 if(!localStorage.getItem('twinz_payments')){
-  localStorage.setItem('twinz_payments', JSON.stringify([
-    {id:1,supplierId:1,projectId:1,amount:250000,status:'paid',date:'2026-09-01',proof:'REF123'},
-    {id:2,supplierId:2,projectId:2,amount:180000,status:'approved',date:'2026-09-15',proof:'REF124'}
-  ]));
+  localStorage.setItem('twinz_payments', JSON.stringify([]));
 }
 
 function closeAllModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden'))}
@@ -288,7 +260,6 @@ function renderAll(){
   renderSuppliers();
   renderPayments();
   renderStats();
-  renderActivity();
   renderChart();
 }
 
@@ -342,23 +313,12 @@ function renderPayments(){
   }).join('');
 }
 
-function renderActivity(){
-  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
-  const activities=payments.slice(-5).reverse().map(p=>[
-    p.date,'Project #'+p.projectId,'Payment logged R'+p.amount.toLocaleString(),p.status
-  ]);
-  document.querySelector('#activityTable tbody').innerHTML=activities.map(a=>`
-    <tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td><td><span class="status ${a[3]}">${a[3]}</span></td></tr>
-  `).join('');
-}
-
 function renderChart(){
   const ctx=document.getElementById('spendChart');
   if(!ctx)return;
   const payments=JSON.parse(localStorage.getItem('twinz_payments'));
   const paid=payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
   const pending=payments.filter(p=>p.status!=='paid').reduce((a,b)=>a+b.amount,0);
-
   if(spendChart)spendChart.destroy();
   spendChart=new Chart(ctx,{
     type:'doughnut',
@@ -421,7 +381,7 @@ function exportCSV(type){
   const data=JSON.parse(localStorage.getItem('twinz_'+type));
   if(!data.length){alert('No data to export');return;}
   const csv=[Object.keys(data[0]).join(','),...data.map(r=>Object.values(r).join(','))].join('\n');
-  const blob=new Blob([csv],{type:'text/csv'});
+  const blob=new Blob([csv],{type:'text/cssv'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
   a.href=url;a.download=type+'_'+new Date().toISOString().split('T')[0]+'.csv';
