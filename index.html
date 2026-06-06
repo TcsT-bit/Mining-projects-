@@ -74,7 +74,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 .download-btn{position:static;transform:none;margin-top:10px}
   table{font-size:0.85rem}
   th,td{padding:8px}
-}
 </style>
 </head>
 <body>
@@ -145,12 +144,12 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <div id="payments" class="tab hidden">
   <div class="card">
     <h3>Payment Tracker</h3>
+    <p>All payments are logged by admin. Contact us to update records.</p>
     <div class="action-bar">
-      <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
       <button class="btn-secondary" onclick="exportCSV('payments')">Export CSV</button>
     </div>
     <table id="paymentsTable">
-      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -176,22 +175,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-</div>
-
-<!-- MODALS -->
-<div id="paymentModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <h3>Log Payment</h3>
-    <select id="paySupplier" style="width:100%;margin:8px 0"><option value="">Select Supplier</option></select>
-    <select id="payProject" style="width:100%;margin:8px 0"><option value="">Select Project</option></select>
-    <input type="number" id="payAmount" placeholder="Amount R" style="width:100%;margin:8px 0">
-    <select id="payStatus" style="width:100%;margin:8px 0">
-      <option value="pending">Pending</option><option value="approved">Approved</option><option value="paid">Paid</option>
-    </select>
-    <input type="text" id="payProof" placeholder="Proof URL or Ref No" style="width:100%;margin:8px 0">
-    <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
-  </div>
 </div>
 
 <footer style="text-align:center;padding:20px;color:#666;font-size:0.9rem">
@@ -279,7 +262,6 @@ function renderPayments(){
       <td>R${p.amount.toLocaleString()}</td>
       <td><span class="status ${p.status}">${p.status}</span></td>
       <td>${p.proof||'-'}</td>
-      <td><button class="btn-danger" onclick="deleteItem('payments',${p.id})">Delete</button></td>
     </tr>`;
   }).join('');
 }
@@ -295,33 +277,6 @@ function renderChart(){
     type:'doughnut',
     data:{labels:['Paid','Pending'],datasets:[{data:[paid,pending],backgroundColor:['#007A4D','#FFB81C']}]}
   });
-}
-
-function openPaymentModal(){
-  closeAllModals();
-  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
-  document.getElementById('paySupplier').innerHTML='<option value="">Select Supplier</option>'+suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-  document.getElementById('payProject').innerHTML='<option value="">Select Project</option>'+projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
-  document.getElementById('paymentModal').classList.remove('hidden');
-}
-
-function closeModal(id){
-  const modal=document.getElementById(id);
-  if(!modal)return;
-  modal.classList.add('hidden');
-  modal.querySelectorAll('input,select,textarea').forEach(el=>{if(el.tagName==='SELECT')el.selectedIndex=0;else el.value=''});
-}
-
-function addPayment(){
-  const supplierId=document.getElementById('paySupplier').value;
-  const projectId=document.getElementById('payProject').value;
-  const amount=document.getElementById('payAmount').value;
-  if(!supplierId||!projectId||!amount){alert('Please fill all fields');return;}
-  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
-  payments.push({id:Date.now(),supplierId:parseInt(supplierId),projectId:parseInt(projectId),amount:parseInt(amount),status:document.getElementById('payStatus').value,date:new Date().toISOString().split('T')[0],proof:document.getElementById('payProof').value});
-  localStorage.setItem('twinz_payments',JSON.stringify(payments));
-  closeModal('paymentModal');renderAll();
 }
 
 function deleteItem(type,id){
