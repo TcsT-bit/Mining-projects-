@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MineSLP Compliance Portal</title>
+<title>Twins Cooperate Services - MineSLP Compliance Portal</title>
 <style>
 :root{
   --green:#007A4D;
@@ -59,6 +59,8 @@ ul{margin:8px 0 8px 20px}
 .metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}
 .status{padding:8px;border-radius:6px;margin-top:8px;font-weight:bold;text-align:center}
 .status.compliant{background:#d4edda;color:#155724}
+.status.warning{background:#fff3cd;color:#856404}
+.status.info{background:#d1ecf1;color:#0c5460}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .stat-card{background:#f8f9fa;padding:12px;border-radius:8px;text-align:center}
 .stat-card h3{margin:0;font-size:28px;color:var(--green)}
@@ -73,63 +75,66 @@ ul{margin:8px 0 8px 20px}
 .clearfix::after{content:"";clear:both;display:table}
 .checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
 .checklist-item input{width:auto;margin:0}
+.track-record-item{border:1px solid #ddd;border-radius:8px;padding:12px;margin:10px 0}
+.guarantee-box{background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0}
 
 /* Print settings */
 @media print {
-  header, nav, .download-btn {display:none}
+  header, nav,.download-btn {display:none}
   body{margin:0;background:#fff}
-  .card{box-shadow:none;border:1px solid #ddd}
+.card{box-shadow:none;border:1px solid #ddd}
   @page {margin:20mm}
 </style>
 </head>
 <body>
 <header>
   <button class="download-btn" onclick="window.print()">Download PDF</button>
-  <h2>MineSLP Compliance Portal</h2>
-  <small>Transparency. Quality. Accountability. For Mining Projects.</small>
+  <h2>Twins Cooperate Services (Pty) Ltd</h2>
+  <small>Transparency. Quality. Accountability. For Mining SLP Projects.</small>
 </header>
 
 <nav>
   <button class="active" onclick="showTab('overview')">Overview</button>
   <button onclick="showTab('code')">Code of Practice</button>
   <button onclick="showTab('compliance')">Compliance Check</button>
-  <button onclick="showTab('projects')">Active Projects</button>
+  <button onclick="showTab('projects')">Capacity</button>
+  <button onclick="showTab('trackrecord')">Track Record</button>
 </nav>
 
 <div class="container">
 
 <div id="overview" class="tab">
   <div class="card">
-    <h3><span class="live-indicator"></span> Company Compliance Status</h3>
+    <h3><span class="live-indicator"></span> Company Status</h3>
     <div class="grid">
       <div class="stat-card">
-        <h3 id="complianceScore">100%</h3>
-        <small>Compliance Score</small>
+        <h3>100%</h3>
+        <small>Compliance Ready</small>
       </div>
       <div class="stat-card">
-        <h3 id="activeProjects">2</h3>
-        <small>Active Projects</small>
+        <h3>CIDB</h3>
+        <small>Registered</small>
       </div>
       <div class="stat-card">
-        <h3 id="passedAudits">12</h3>
-        <small>Passed Audits</small>
+        <h3>Tax</h3>
+        <small>Compliant</small>
       </div>
       <div class="stat-card">
-        <h3 id="zeroIncidents">0</h3>
-        <small>Safety Incidents</small>
+        <h3>COIDA</h3>
+        <small>Active</small>
       </div>
     </div>
-    <div class="status compliant">✓ Fully Compliant with Mining SLP Requirements</div>
+    <div class="status info">New Entrant to Mining SLP - Proven in Construction & Infrastructure</div>
   </div>
 
   <div class="card">
-    <h3>Why Mines Trust Us</h3>
+    <h3>Why Mines Should Consider Us</h3>
     <ul>
-      <li><strong>Quality First:</strong> All work done to SANS standards with SANAS-accredited testing</li>
-      <li><strong>Zero Tolerance:</strong> Strict anti-corruption and ethics policy</li>
-      <li><strong>Full Transparency:</strong> Weekly reports, site diaries, and open project files</li>
-      <li><strong>Local Impact:</strong> Priority for local labor and SMME subcontractors per SLP targets</li>
-      <li><strong>Accountable:</strong> We stand by 12-month defects liability and retention terms</li>
+      <li><strong>Zero Legacy Issues:</strong> No blacklisting, no failed projects, no corruption history</li>
+      <li><strong>Systems First:</strong> We’ve built our processes around transparency from day 1</li>
+      <li><strong>Flexible & Hungry:</strong> We take SLP compliance seriously because our reputation depends on it</li>
+      <li><strong>Risk Covered:</strong> Performance guarantee and completion commitment in every contract</li>
+      <li><strong>Local Focus:</strong> Limpopo-based, prioritize local labor and SMME partnerships</li>
     </ul>
   </div>
 </div>
@@ -137,56 +142,65 @@ ul{margin:8px 0 8px 20px}
 <div id="code" class="tab hidden">
   <div class="card">
     <h3>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h3>
-    
+
     <h4>1. Purpose</h4>
-    <p>This code commits <strong>[Your Company Name]</strong> to delivering all mining Social Labour Plan and community projects to the required standard, on time, and with full transparency. The goal is to restore public trust in how mining funds are spent.</p>
+    <p>This code commits <strong>Twins Cooperate Services (Pty) Ltd</strong> to delivering all mining Social Labour Plan and community projects to the required standard, on time, and with full transparency.</p>
 
     <h4>2. Quality & Technical Standards</h4>
-    <p>We commit to executing all works strictly to the approved project specification, BOQ, and relevant SANS/SANS-based standards.</p>
     <ul>
-      <li>No substitution of materials, equipment, or methods without written approval from the Engineer/Client</li>
-      <li>All material testing, inspections, and certifications will be conducted by SANAS-accredited laboratories</li>
-      <li>Any work that fails testing or inspection will be rectified at our cost and within agreed timelines</li>
+      <li>Work executed to approved specification, BOQ, and SANS standards</li>
+      <li>No material substitution without written approval</li>
+      <li>All testing by SANAS-accredited labs. Failed tests rectified at our cost</li>
     </ul>
 
-    <h4>3. Transparency, Reporting & Documentation</h4>
+    <h4>3. Transparency & Documentation</h4>
     <ul>
-      <li>Weekly progress reports, delivery notes, test results, and site diaries submitted to the client</li>
-      <li>Project file maintained and available for client and community oversight on request</li>
-      <li>All payment claims supported by evidence of actual work completed and verified</li>
+      <li>Weekly progress reports, delivery notes, test results, site diaries submitted</li>
+      <li>Open project file for client and community oversight</li>
+      <li>Payment claims supported by evidence of work done</li>
     </ul>
 
-    <h4>4. Anti-Corruption, Ethics & Compliance</h4>
+    <h4>4. Anti-Corruption & Ethics</h4>
     <ul>
-      <li>We do not offer, give, or accept bribes, gifts, or inducements to secure contracts</li>
-      <li>We report any attempt at collusion or interference with QA/QC processes immediately</li>
-      <li>Pricing is based on actual cost + fair margin. No underbidding to compromise quality</li>
-      <li>Full compliance with Mine Health and Safety Act, OHSA, and CIDB regulations</li>
+      <li>Zero tolerance for bribes and collusion. Report any attempt immediately</li>
+      <li>Pricing based on actual cost + fair margin. No underbidding to cut corners</li>
+      <li>Full compliance with MHSA, OHSA, CIDB regulations</li>
     </ul>
 
     <h4>5. Project Delivery & Accountability</h4>
     <ul>
-      <li>We complete projects as contracted. Cash flow issues notified 14 days in advance</li>
-      <li>We accept standard retention and commit to full defects liability period</li>
-      <li>CIDB grading, tax clearance, COIDA, and references open for verification</li>
+      <li>14-day notice + recovery plan if cash flow issues arise</li>
+      <li>Accept standard retention and 12-month defects liability</li>
+      <li>All compliance docs open for verification</li>
     </ul>
 
-    <h4>6. Local Empowerment & Community Benefit</h4>
+    <h4>6. Tender Guarantee & Failure Response</h4>
+    <div class="guarantee-box">
+      <p><strong>Our Commitment:</strong> If we fail to deliver, we will:</p>
+      <ul>
+        <li>Notify client 14 days in advance with written recovery plan</li>
+        <li>Allow client to call on performance guarantee/retention to complete work</li>
+        <li>Hand over all completed work and records for continuity</li>
+        <li>Cover cost of rectifying defective work in defects liability period</li>
+      </ul>
+    </div>
+
+    <h4>7. Local Empowerment</h4>
     <ul>
-      <li>Prioritize local labor, SMMEs, and suppliers per SLP and procurement targets</li>
-      <li>Participate in community engagement sessions during and after handover</li>
-      <li>Uphold health, safety, and environmental standards to protect workers and community</li>
+      <li>Prioritize local labor, SMMEs, and suppliers per SLP targets</li>
+      <li>Participate in community engagement sessions</li>
+      <li>Uphold health, safety, and environmental standards</li>
     </ul>
 
     <div class="signature">
       <div>Signed: ___________________</div>
       <p>Date: ___________________<br>
-      Director, [Your Company Name]<br>
-      CIDB No: [If applicable]</p>
+      Director, Twins Cooperate Services (Pty) Ltd<br>
+      CIDB No: [Add CIDB No]</p>
     </div>
 
     <div class="footer clearfix">
-      <span class="footer-left">Document: COP-SLP-001</span>
+      <span class="footer-left">Document: TCS-COP-SLP-001</span>
       <span>Version: 1.0</span>
       <span class="footer-right">Issue Date: October 2025</span>
     </div>
@@ -195,77 +209,94 @@ ul{margin:8px 0 8px 20px}
 
 <div id="compliance" class="tab hidden">
   <div class="card">
-    <h3>Self-Compliance Checklist</h3>
-    <p>Use this to verify you're ready for mine audits. Check each item:</p>
-    
-    <div class="checklist-item">
-      <input type="checkbox" id="c1" checked disabled>
-      <label for="c1">CIDB Registration Active & Verified</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c2" checked disabled>
-      <label for="c2">Tax Clearance Certificate Valid</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c3" checked disabled>
-      <label for="c3">COIDA Letter of Good Standing</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c4" checked disabled>
-      <label for="c4">SANS Standards Available on Site</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c5" checked disabled>
-      <label for="c5">SANAS Lab Partnership for Testing</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c6" checked disabled>
-      <label for="c6">Weekly Reporting System in Place</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c7" checked disabled>
-      <label for="c7">Anti-Corruption Policy Signed</label>
-    </div>
-    <div class="checklist-item">
-      <input type="checkbox" id="c8" checked disabled>
-      <label for="c8">SLP Local Employment Plan Active</label>
-    </div>
-    
-    <div class="status compliant" style="margin-top:16px">All 8 Critical Requirements Met</div>
-  </div>
+    <h3>Compliance Status - Twins Cooperate Services (Pty) Ltd</h3>
 
-  <div class="card">
-    <h3>Company Details</h3>
-    <div class="metric"><span>Company Name</span><strong>[Your Company Name]</strong></div>
-    <div class="metric"><span>Registration No</span><strong>[Your Reg No]</strong></div>
-    <div class="metric"><span>CIDB Grade</span><strong>[Your Grade]</strong></div>
-    <div class="metric"><span>Contact</span><strong>[Your Number]</strong></div>
-    <div class="metric"><span>Email</span><strong>[Your Email]</strong></div>
-    <div class="metric"><span>Address</span><strong>[Your Address]</strong></div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Company Registered: 2024/444303/07</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Tax/VAT Compliant: 9819040198</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>CIDB Registration: [Add CIDB No]</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>COIDA Letter of Good Standing: Available</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Banking: Standard Bank Acc 10 26 459 443 4, Branch 006145</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Quality Management System: In Place</label>
+    </div>
+
+    <div class="status compliant" style="margin-top:16px">Ready for Mine Vendor Verification</div>
   </div>
 </div>
 
 <div id="projects" class="tab hidden">
   <div class="card">
-    <h3>Active Mining SLP Projects</h3>
-    <div class="metric"><span>Polokwane Access Road Rehab</span><strong class="status compliant" style="padding:4px 8px">In Progress</strong></div>
-    <div class="metric"><span>Limpopo Water Borehole Project</span><strong class="status compliant" style="padding:4px 8px">In Progress</strong></div>
-    <div style="margin-top:12px">
-      <small>Project files, test results, and photos available on request for client review.</small>
+    <h3>Our Capacity for Mining SLP Work</h3>
+    <p>While we haven’t executed direct mining SLP contracts yet, we have capacity and experience in the same scope:</p>
+
+    <div class="metric"><span>Civil & Infrastructure</span><strong>Roads, Fencing, Structures</strong></div>
+    <div class="metric"><span>Water & Sanitation</span><strong>Boreholes, Pipelines</strong></div>
+    <div class="metric"><span>Building & Maintenance</span><strong>Community Facilities</strong></div>
+    <div class="metric"><span>Equipment & Plant</span><strong>Access via Hire Partners</strong></div>
+
+    <div class="status info" style="margin-top:12px">
+      We partner with established contractors for technical support on first mining SLP projects.
+      Our role: project management, local labor, SMME coordination, compliance documentation.
+    </div>
+  </div>
+</div>
+
+<div id="trackrecord" class="tab hidden">
+  <div class="card">
+    <h3>Track Record - Relevant Experience</h3>
+    <p class="status warning">Note: Twins Cooperate Services is a new entrant to mining SLP work.
+    Below are relevant construction/infrastructure projects completed. All documentation available for verification.</p>
+
+    <div class="track-record-item">
+      <h4>Project: [Add Project Name]</h4>
+      <p><strong>Client:</strong> [Client Name]<br>
+      <strong>Scope:</strong> [e.g. Community Fence, Road Maintenance]<br>
+      <strong>Value:</strong> R[Amount] | <strong>Completed:</strong> [Date]<br>
+      <strong>Status:</strong> <span class="status compliant">Completed & Handed Over</span></p>
+      <p>Scope matches typical mining SLP requirements: quality control, local labor, reporting.</p>
+    </div>
+
+    <div class="track-record-item">
+      <h4>Subcontractor Experience</h4>
+      <p>We have worked as subcontractors on [Project Type] for [Main Contractor].
+      This gives us exposure to mine-style reporting and QA/QC processes.</p>
+    </div>
+
+    <div class="status info" style="margin-top:16px">
+      <strong>Our Honest Pitch:</strong> We haven’t done mining SLP before.
+      That means no bad habits, no shortcuts, and full focus on getting your project right
+      so we can build a reference you’ll be proud of.
     </div>
   </div>
 
   <div class="card">
-    <h3>Completed Projects</h3>
-    <div class="metric"><span>Ga-Matlala Community Fence</span><strong>Completed Aug 2025</strong></div>
-    <div class="metric"><span>Mokopane School Upgrade</span><strong>Completed May 2025</strong></div>
+    <h3>References & Verification</h3>
+    <div class="metric"><span>Client Reference 1</span><strong>[Name & Number]</strong></div>
+    <div class="metric"><span>Client Reference 2</span><strong>[Name & Number]</strong></div>
+    <small>Call them. Ask about quality, timekeeping, and honesty.</small>
   </div>
 </div>
 
 </div>
 
 <footer>
-  © 2026 [Your Company Name]. Built for mining compliance.
+  © 2026 Twins Cooperate Services (Pty) Ltd. Reg No: 2024/444303/07
 </footer>
 
 <script>
