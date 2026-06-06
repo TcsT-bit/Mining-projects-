@@ -76,19 +76,16 @@ tr:hover{background:#fafafa}
 input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
 .btn-primary{background:var(--green);color:#fff;border:none;cursor:pointer;font-weight:bold}
 .btn-primary:hover{background:#006a42}
-.btn-danger{background:var(--red);color:#fff;border:none;cursor:pointer}
 .hidden{display:none}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
-.modal-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%}
+.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%}
+.modal-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%;position:relative;z-index:1001}
 .badge{display:inline-block;padding:4px 10px;background:#e9ecef;border-radius:20px;font-size:0.8rem;margin-right:5px}
 .live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .alert{padding:12px;border-radius:6px;margin:10px 0}
 .alert-success{background:#d4edda;color:#155724}
 .alert-info{background:#d1ecf1;color:#0c5460}
-.tabs{display:flex;gap:8px;margin-bottom:16px;border-bottom:2px solid #eee}
-.tabs button{background:none;border:none;padding:10px 16px;cursor:pointer;border-bottom:3px solid transparent}
-.tabs button.active{border-bottom-color:var(--green);color:var(--green);font-weight:bold}
 
 @media (max-width:768px){
   table{font-size:0.85rem}
@@ -222,18 +219,20 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
 
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('loginModal')"></div>
   <div class="modal-content">
     <h3>Partner Login</h3>
     <p>Use 'admin' / 'twinz2026' for admin access. Suppliers use company name as password for demo.</p>
     <input type="text" id="username" placeholder="Username/Company" style="width:100%;margin:10px 0">
     <input type="password" id="password" placeholder="Password" style="width:100%;margin:10px 0">
     <button class="btn-primary" onclick="login()" style="width:100%">Login</button>
-    <button onclick="closeLogin()" style="width:100%;margin-top:10px">Cancel</button>
+    <button type="button" onclick="closeModal('loginModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
 <!-- PROJECT MODAL -->
 <div id="projectModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
   <div class="modal-content">
     <h3>Add Project</h3>
     <input type="text" id="pName" placeholder="Project Name" style="width:100%;margin:8px 0">
@@ -241,12 +240,13 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
     <input type="number" id="pProgress" placeholder="Progress %" style="width:100%;margin:8px 0">
     <button class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
-    <button onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
+    <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
 <!-- SUPPLIER MODAL -->
 <div id="supplierModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('supplierModal')"></div>
   <div class="modal-content">
     <h3>Add Supplier</h3>
     <input type="text" id="sName" placeholder="Company Name" style="width:100%;margin:8px 0">
@@ -254,16 +254,21 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <input type="text" id="sArea" placeholder="Area" style="width:100%;margin:8px 0">
     <input type="text" id="sCidb" placeholder="CIDB Grade" style="width:100%;margin:8px 0">
     <button class="btn-primary" onclick="addSupplier()" style="width:100%">Save Supplier</button>
-    <button onclick="closeModal('supplierModal')" style="width:100%;margin-top:10px">Cancel</button>
+    <button type="button" onclick="closeModal('supplierModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
 <!-- PAYMENT MODAL -->
 <div id="paymentModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
   <div class="modal-content">
     <h3>Log Payment</h3>
-    <select id="paySupplier" style="width:100%;margin:8px 0"></select>
-    <select id="payProject" style="width:100%;margin:8px 0"></select>
+    <select id="paySupplier" style="width:100%;margin:8px 0">
+      <option value="">Select Supplier</option>
+    </select>
+    <select id="payProject" style="width:100%;margin:8px 0">
+      <option value="">Select Project</option>
+    </select>
     <input type="number" id="payAmount" placeholder="Amount R" style="width:100%;margin:8px 0">
     <select id="payStatus" style="width:100%;margin:8px 0">
       <option value="pending">Pending</option>
@@ -271,7 +276,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
       <option value="paid">Paid</option>
     </select>
     <button class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
-    <button onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
+    <button type="button" onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
@@ -400,7 +405,14 @@ function renderActivity(){
 }
 
 function openLogin(){document.getElementById('loginModal').classList.remove('hidden')}
-function closeLogin(){document.getElementById('loginModal').classList.add('hidden')}
+function closeModal(id){
+  document.getElementById(id).classList.add('hidden');
+  const modal = document.getElementById(id);
+  modal.querySelectorAll('input, select').forEach(el => {
+    if(el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  });
+}
 
 function login(){
   const u = document.getElementById('username').value;
@@ -413,11 +425,11 @@ function login(){
     document.getElementById('adminControls').classList.remove('hidden');
     document.getElementById('supplierAdmin').classList.remove('hidden');
     document.getElementById('paymentAdmin').classList.remove('hidden');
-    closeLogin();
+    closeModal('loginModal');
     alert('Admin login successful');
   }else if(u){
     currentUser=u;
-    closeLogin();
+    closeModal('loginModal');
     alert('Welcome '+u+'. You can view your project and payment status.');
   }
   renderAll();
@@ -425,16 +437,21 @@ function login(){
 
 function openProjectModal(){document.getElementById('projectModal').classList.remove('hidden')}
 function openSupplierModal(){document.getElementById('supplierModal').classList.remove('hidden')}
+
 function openPaymentModal(){
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
 
-  document.getElementById('paySupplier').innerHTML = suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-  document.getElementById('payProject').innerHTML = projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  document.getElementById('paySupplier').innerHTML =
+    '<option value="">Select Supplier</option>' +
+    suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+
+  document.getElementById('payProject').innerHTML =
+    '<option value="">Select Project</option>' +
+    projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+
   document.getElementById('paymentModal').classList.remove('hidden');
 }
-
-function closeModal(id){document.getElementById(id).classList.add('hidden')}
 
 function addProject(){
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
@@ -467,12 +484,21 @@ function addSupplier(){
 }
 
 function addPayment(){
+  const supplierId = document.getElementById('paySupplier').value;
+  const projectId = document.getElementById('payProject').value;
+  const amount = document.getElementById('payAmount').value;
+
+  if(!supplierId ||!projectId ||!amount){
+    alert('Please fill all fields');
+    return;
+  }
+
   const payments = JSON.parse(localStorage.getItem('twinz_payments'));
   payments.push({
     id:Date.now(),
-    supplierId:parseInt(document.getElementById('paySupplier').value),
-    projectId:parseInt(document.getElementById('payProject').value),
-    amount:parseInt(document.getElementById('payAmount').value),
+    supplierId:parseInt(supplierId),
+    projectId:parseInt(projectId),
+    amount:parseInt(amount),
     status:document.getElementById('payStatus').value,
     date:new Date().toISOString().split('T')[0]
   });
