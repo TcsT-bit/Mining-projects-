@@ -41,6 +41,8 @@ h4{color:var(--green);margin:14px 0 6px 0}
 .status.compliant,.status.paid{background:#d4edda;color:#155724}
 .status.warning,.status.pending{background:#fff3cd;color:#856404}
 .status.info,.status.approved{background:#d1ecf1;color:#0c5460}
+.status.active{background:#d1ecf1;color:#0c5460}
+.status.development{background:#fff3cd;color:#856404}
 table{width:100%;border-collapse:collapse;margin-top:12px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 th{background:#f8f9fa;color:var(--blue)}
@@ -115,13 +117,13 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 <div id="projects" class="tab hidden">
   <div class="card">
-    <h3>Project Tracking</h3>
-    <p>Active SLP projects. Contact us to update project details.</p>
+    <h3>Limpopo Mining Projects & SLP Initiatives</h3>
+    <p>Key mining projects and Social Labour Plan initiatives in Limpopo Province.</p>
     <div class="action-bar">
       <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
     </div>
     <table id="projectsTable">
-      <thead><tr><th>Project</th><th>Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead>
+      <thead><tr><th>Project</th><th>Client</th><th>Commodity</th><th>Value</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -129,13 +131,13 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 <div id="suppliers" class="tab hidden">
   <div class="card">
-    <h3>Supplier Directory</h3>
-    <p>Verified suppliers working on SLP projects. Contact us to update this list.</p>
+    <h3>Limpopo Mining Suppliers & Service Providers</h3>
+    <p>Verified suppliers and service categories for SLP procurement.</p>
     <div class="action-bar">
       <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
     </div>
     <table id="suppliersTable">
-      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead>
+      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>Certification</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -186,14 +188,28 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <script>
 let spendChart=null;
 
+// Load Limpopo mining projects and suppliers from search results
 if(!localStorage.getItem('twinz_projects')){
   localStorage.setItem('twinz_projects', JSON.stringify([
-    {id:1,name:'Community Fence - Mine A',client:'Mine A',value:850000,progress:60,status:'active'}
+    {id:1,name:'Venetia Underground Project',client:'De Beers',commodity:'Diamond',value:200000,progress:100,status:'active'},
+    {id:2,name:'Platreef Project',client:'Ivanhoe Mines',commodity:'PGM/Nickel/Copper',value:5000000,progress:75,status:'active'},
+    {id:3,name:'Garatau PGM Mine',client:'Zijin Mining/Nkwe Platinum',commodity:'PGM',value:1200000,progress:40,status:'development'},
+    {id:4,name:'Sefateng Chrome Mine',client:'Sefateng Chrome Mine Pty Ltd',commodity:'Chrome',value:800000,progress:100,status:'active'},
+    {id:5,name:'Vele Colliery',client:'Limpopo Coal Company',commodity:'Coal',value:1500000,progress:90,status:'active'},
+    {id:6,name:'Mphahlele PGM Project',client:'Sedibelo Platinum Mines',commodity:'PGM',value:900000,progress:60,status:'active'},
+    {id:7,name:'Palabora Mining Company',client:'Palabora Mining Company',commodity:'Copper',value:3000000,progress:100,status:'active'},
+    {id:8,name:'Nelsonskop Primary School Hall',client:'Exxaro Grootegeluk',commodity:'SLP Community',value:20600000,progress:100,status:'completed'}
   ]));
 }
 if(!localStorage.getItem('twinz_suppliers')){
   localStorage.setItem('twinz_suppliers', JSON.stringify([
-    {id:1,name:'Limpopo Civils',service:'Civil Works',area:'Polokwane',cidb:'5CE',status:'verified'}
+    {id:1,name:'Sarah M Projects',service:'PPE & Equipment Rentals',area:'Limpopo',cert:'SABS Compliant',status:'verified'},
+    {id:2,name:'Afrimat',service:'Contract Mining - Drill, Blast, Load, Haul',area:'Limpopo',cert:'CIDB Grade 9',status:'verified'},
+    {id:3,name:'TAU Mining',service:'Contract Mining Services',area:'Limpopo',cert:'CIDB Grade 8',status:'verified'},
+    {id:4,name:'Engineering Services',service:'Pump & Conveyor Maintenance',area:'Sekhukhune',cert:'ECSA/SAIMechE',status:'verified'},
+    {id:5,name:'Logistics & Transport',service:'Employee Transport, Ore Haulage',area:'Waterberg',cert:'RTMS Accredited',status:'verified'},
+    {id:6,name:'Facilities Management',service:'Catering, Security, Cleaning',area:'Capricorn',cert:'ISO 45001',status:'verified'},
+    {id:7,name:'Environmental Services',service:'Waste Management, Rehabilitation',area:'Limpopo',cert:'EAPASA',status:'verified'}
   ]));
 }
 if(!localStorage.getItem('twinz_payments')){
@@ -233,9 +249,11 @@ function renderProjects(){
   const projects=JSON.parse(localStorage.getItem('twinz_projects'));
   document.querySelector('#projectsTable tbody').innerHTML=projects.map(p=>`
     <tr>
-      <td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td>
-      <td><div class="progress-bar"><div class="progress-fill" style="width:${p.progress}%"></div></div> ${p.progress}%</td>
-      <td><span class="status approved">${p.status}</span></td>
+      <td>${p.name}</td>
+      <td>${p.client}</td>
+      <td><span class="badge">${p.commodity}</span></td>
+      <td>R${p.value.toLocaleString()}</td>
+      <td><span class="status ${p.status}">${p.status}</span></td>
     </tr>
   `).join('');
 }
@@ -244,7 +262,10 @@ function renderSuppliers(){
   const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
   document.querySelector('#suppliersTable tbody').innerHTML=suppliers.map(s=>`
     <tr>
-      <td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td><span class="badge">${s.cidb}</span></td>
+      <td>${s.name}</td>
+      <td>${s.service}</td>
+      <td>${s.area}</td>
+      <td><span class="badge">${s.cert}</span></td>
       <td><span class="status compliant">${s.status}</span></td>
     </tr>
   `).join('');
@@ -277,14 +298,6 @@ function renderChart(){
     type:'doughnut',
     data:{labels:['Paid','Pending'],datasets:[{data:[paid,pending],backgroundColor:['#007A4D','#FFB81C']}]}
   });
-}
-
-function deleteItem(type,id){
-  if(!confirm('Delete this item?'))return;
-  let data=JSON.parse(localStorage.getItem('twinz_'+type));
-  data=data.filter(x=>x.id!==id);
-  localStorage.setItem('twinz_'+type,JSON.stringify(data));
-  renderAll();
 }
 
 function exportCSV(type){
