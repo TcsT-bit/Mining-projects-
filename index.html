@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twinz Cooperate Services - MineSLP Delivery Partner</title>
 <meta property="og:title" content="Twinz Cooperate Services - Mining SLP Delivery Partner">
-<meta property="og:description" content="We deliver mining SLP projects on time, with full transparency and zero legacy issues. Limpopo based.">
+<meta property="og:description" content="We deliver mining SLP projects through verified partnerships. Transparent, on time, accountable. Limpopo based.">
 <meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
 <link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -61,17 +61,17 @@ tr:hover{background:#fafafa}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .action-bar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .chart-container{position:relative;height:300px;margin-top:20px}
-.progress-bar{width:100%;height:20px;background:#e9ecef;border-radius:10px;overflow:hidden}
-.progress-fill{height:100%;background:var(--green);transition:width 0.3s}
 .guarantee-box{background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0}
 .contact-box{background:#f8f9fa;padding:12px;border-radius:8px;margin-top:12px}
 .checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
 .checklist-item input{width:auto;margin:0}
-.track-record-item{border:1px solid #ddd;border-radius:8px;padding:12px;margin:10px 0}
 .map-container{height:200px;background:#e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666;margin-top:10px}
 .signature{margin-top:40px}
 .signature div{margin-top:30px;width:300px;border-top:1px solid #000}
 .challenge-box{background:#0a3d62;color:#fff;padding:15px;border-radius:8px;margin:15px 0;font-weight:bold}
+.leadership{display:flex;align-items:center;gap:15px;margin-top:15px}
+.leadership img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--green)}
+.small-note{font-size:0.85rem;color:var(--muted);margin-top:8px}
 
 @media print {
   header, nav,.download-btn {display:none}
@@ -94,7 +94,7 @@ tr:hover{background:#fafafa}
     <img src="logo.png" alt="Twinz Cooperate Services Logo" class="header-logo">
     <div class="header-text">
       <h2>Twinz Cooperate Services (Pty) Ltd</h2>
-      <small>Mining SLP Delivery. Transparent. On Time. Accountable.</small>
+      <small>Mining SLP Delivery Through Verified Partnerships</small>
       <div class="contact-line">Email: twinz.cooperate.services@gmail.com | Limpopo, South Africa</div>
     </div>
   </div>
@@ -115,13 +115,21 @@ tr:hover{background:#fafafa}
 <div id="dashboard" class="tab">
   <div class="card">
     <div class="challenge-box">
-      Tired of SLP delays, poor reporting, and failed community projects? We take full delivery responsibility so your SLP targets get met without drama.
+      Tired of SLP delays, poor reporting, and failed community projects? We take full delivery responsibility through verified contractor partnerships so your SLP targets get met without drama.
     </div>
 
-    <h3><span class="live-indicator"></span> Live SLP Delivery Dashboard</h3>
+    <div class="leadership">
+      <img src="director.jpg" alt="Director">
+      <div>
+        <h4>Nkuna Thabang Given</h4>
+        <small>Director | 6+ years civil & infrastructure delivery in Limpopo. SLP compliance trained.</small>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px"><span class="live-indicator"></span> Live SLP Delivery Dashboard</h3>
     <div class="grid">
       <div class="stat-card"><h3 id="activeProjects">0</h3><small>Active Projects</small></div>
-      <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Verified Partners</small></div>
+      <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Network Partners</small></div>
       <div class="stat-card"><h3 id="paidOut">R0</h3><small>Paid to SMMEs</small></div>
       <div class="stat-card"><h3>100%</h3><small>SLP Compliance</small></div>
     </div>
@@ -147,7 +155,7 @@ tr:hover{background:#fafafa}
   <div class="card">
     <h3>Why Mines & Contractors Choose Twinz</h3>
     <ul>
-      <li><strong>Full Delivery Responsibility:</strong> We own the SLP outcome. You get a completion certificate, not excuses.</li>
+      <li><strong>Full Delivery Responsibility:</strong> We own the SLP outcome through partnerships with CIDB 6+ contractors. You get a completion certificate, not excuses.</li>
       <li><strong>Zero Legacy Issues:</strong> No blacklisting, no corruption history, no failed projects. Clean record from day 1.</li>
       <li><strong>Speed + Compliance:</strong> We mobilize in 14 days with full documentation ready for mine vendor verification.</li>
       <li><strong>Local First Execution:</strong> 80% local labor, SMME development, and host community hiring built into every contract.</li>
@@ -158,8 +166,8 @@ tr:hover{background:#fafafa}
 
 <div id="projects" class="tab hidden">
   <div class="card">
-    <h3>Limpopo Mining Projects We Service</h3>
-    <p>We deliver SLP and community projects aligned to these active mining operations.</p>
+    <h3>Limpopo Mining Projects We Align To</h3>
+    <p>Active mining operations in Limpopo with SLP and community project requirements. Data sourced from DMRE SLP reports and public tender portals. Updated Oct 2026.</p>
     <div class="action-bar">
       <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
     </div>
@@ -167,13 +175,14 @@ tr:hover{background:#fafafa}
       <thead><tr><th>Project</th><th>Client</th><th>Commodity</th><th>Value</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
+    <p class="small-note">Note: We deliver SLP projects through partnerships with executing contractors on these operations.</p>
   </div>
 </div>
 
 <div id="suppliers" class="tab hidden">
   <div class="card">
-    <h3>Verified Local Supplier Network</h3>
-    <p>Pre-vetted SMMEs and service providers for rapid SLP procurement and local content compliance.</p>
+    <h3>Active Limpopo SLP Supplier Network</h3>
+    <p>SMMEs and service providers operating in Limpopo’s mining host communities. All partners meet minimum compliance standards.</p>
     <div class="action-bar">
       <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
     </div>
@@ -187,7 +196,11 @@ tr:hover{background:#fafafa}
 <div id="partners" class="tab hidden">
   <div class="card">
     <h3>Contractor Partnership Program</h3>
-    <p>We secure SLP contracts and deliver through experienced contractors. You focus on execution, we handle mine interface, compliance, and payment admin.</p>
+    <p>We secure SLP contracts and deliver through CIDB 6+ partners. You focus on execution, we handle mine interface, compliance, and payment admin.</p>
+
+    <div class="guarantee-box">
+      <strong>Partnership Model:</strong> Twinz acts as prime contractor for SLP management up to CIDB 3. For larger works, we partner with CIDB 6+ firms and carry the SLP compliance and reporting responsibility.
+    </div>
 
     <h4>What you get working with us</h4>
     <ul>
@@ -215,7 +228,7 @@ tr:hover{background:#fafafa}
       <li>COIDA and tax compliance</li>
     </ul>
 
-    <div class="status info">Qualified partners get project scopes within 48 hours.</div>
+    <div class="status info">Qualified partners get project scopes within 48 hours. Partnership letter available on request.</div>
     <a href="#" class="btn-primary" onclick="alert('Upload subcontractor-pack.pdf to replace this link')">Download Partner Pack</a>
   </div>
 </div>
@@ -242,17 +255,21 @@ tr:hover{background:#fafafa}
     </div>
     <div class="checklist-item">
       <input type="checkbox" checked disabled>
-      <label>Banking: Standard Bank Acc 10 26 459 443 4, Branch 006145</label>
+      <label>Banking: Standard Bank Acc 10 26 459 443 4, Branch 006145 - Good Standing</label>
     </div>
     <div class="checklist-item">
       <input type="checkbox" checked disabled>
       <label>Quality Management System: ISO 9001 Aligned</label>
     </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Partner Contractor Network: CIDB 6+ Available for Execution</label>
+    </div>
 
     <div class="status compliant" style="margin-top:16px">Ready for Immediate Mine Vendor Verification</div>
 
     <div class="guarantee-box">
-      <strong>Verification Challenge:</strong> Call any director or email us. We’ll provide CIPC, SARS, CIDB, and bank confirmation within 24 hours. If we can’t, you don’t pay.
+      <strong>Verification Challenge:</strong> Call any director or email us. We’ll provide CIPC, SARS, CIDB, bank, and partner contractor letters within 24 hours. If we can’t, you don’t pay.
     </div>
   </div>
 </div>
@@ -262,7 +279,7 @@ tr:hover{background:#fafafa}
     <h3>Performance Guarantee & Delivery Commitment</h3>
 
     <h4>Our Guarantee to Mines & Contractors</h4>
-    <p>Every SLP project we take on is backed by a written performance guarantee. If we fail to deliver, you don’t carry the risk.</p>
+    <p>Every SLP project we take on is backed by a written performance guarantee through our partner network. If we fail to deliver, you don’t carry the risk.</p>
 
     <div class="guarantee-box">
       <p><strong>If we fail to deliver, we will:</strong></p>
@@ -297,7 +314,8 @@ tr:hover{background:#fafafa}
 <footer style="text-align:center;padding:20px;color:#666;font-size:0.9rem">
   © 2026 Twinz Cooperate Services (Pty) Ltd. Reg No: 2024/444303/07<br>
   Directors: Nkuna Thabang Given, Nkuna Thabo Johannes<br>
-  Email: twinz.cooperate.services@gmail.com | Limpopo, South Africa
+  Email: twinz.cooperate.services@gmail.com | Limpopo, South Africa<br>
+  <small>Data sourced from DMRE SLP reports and public tender portals. Updated Oct 2026.</small>
 </footer>
 
 <script>
@@ -316,13 +334,13 @@ localStorage.setItem('twinz_projects', JSON.stringify([
 ]));
 
 localStorage.setItem('twinz_suppliers', JSON.stringify([
-  {id:1,name:'Sarah M Projects',service:'PPE & Equipment Rentals',area:'Limpopo',cert:'SABS Compliant',status:'verified'},
-  {id:2,name:'Afrimat',service:'Contract Mining - Drill, Blast, Load, Haul',area:'Limpopo',cert:'CIDB Grade 9',status:'verified'},
-  {id:3,name:'TAU Mining',service:'Contract Mining Services',area:'Limpopo',cert:'CIDB Grade 8',status:'verified'},
-  {id:4,name:'Engineering Services',service:'Pump & Conveyor Maintenance',area:'Sekhukhune',cert:'ECSA/SAIMechE',status:'verified'},
-  {id:5,name:'Logistics & Transport',service:'Employee Transport, Ore Haulage',area:'Waterberg',cert:'RTMS Accredited',status:'verified'},
-  {id:6,name:'Facilities Management',service:'Catering, Security, Cleaning',area:'Capricorn',cert:'ISO 45001',status:'verified'},
-  {id:7,name:'Environmental Services',service:'Waste Management, Rehabilitation',area:'Limpopo',cert:'EAPASA',status:'verified'}
+  {id:1,name:'Sarah M Projects',service:'PPE & Equipment Rentals',area:'Limpopo',cert:'SABS Compliant',status:'active'},
+  {id:2,name:'Afrimat',service:'Contract Mining - Drill, Blast, Load, Haul',area:'Limpopo',cert:'CIDB Grade 9',status:'active'},
+  {id:3,name:'TAU Mining',service:'Contract Mining Services',area:'Limpopo',cert:'CIDB Grade 8',status:'active'},
+  {id:4,name:'Engineering Services',service:'Pump & Conveyor Maintenance',area:'Sekhukhune',cert:'ECSA/SAIMechE',status:'active'},
+  {id:5,name:'Logistics & Transport',service:'Employee Transport, Ore Haulage',area:'Waterberg',cert:'RTMS Accredited',status:'active'},
+  {id:6,name:'Facilities Management',service:'Catering, Security, Cleaning',area:'Capricorn',cert:'ISO 45001',status:'active'},
+  {id:7,name:'Environmental Services',service:'Waste Management, Rehabilitation',area:'Limpopo',cert:'EAPASA',status:'active'}
 ]));
 
 if(!localStorage.getItem('twinz_payments')){
