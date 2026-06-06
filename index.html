@@ -60,7 +60,6 @@ nav button.active{background:var(--green);color:#fff}
   border-top:4px solid var(--gold)
 }
 h3{color:var(--blue);margin-top:0}
-h4{color:var(--green);margin:14px 0 6px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .stat-card{background:#f8f9fa;padding:16px;border-radius:8px;text-align:center}
 .stat-card h3{margin:0;font-size:32px;color:var(--green)}
@@ -68,25 +67,18 @@ h4{color:var(--green);margin:14px 0 6px 0}
 .status.pending{background:#fff3cd;color:#856404}
 .status.approved{background:#d1ecf1;color:#0c5460}
 .status.paid{background:#d4edda;color:#155724}
-.status.overdue{background:#f8d7da;color:#721c24}
 table{width:100%;border-collapse:collapse;margin-top:12px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 th{background:#f8f9fa;color:var(--blue)}
-tr:hover{background:#fafafa}
 input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
 .btn-primary{background:var(--green);color:#fff;border:none;cursor:pointer;font-weight:bold}
-.btn-primary:hover{background:#006a42}
 .hidden{display:none}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
 .modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%}
 .modal-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%;position:relative;z-index:1001}
-.badge{display:inline-block;padding:4px 10px;background:#e9ecef;border-radius:20px;font-size:0.8rem;margin-right:5px}
 .live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.alert{padding:12px;border-radius:6px;margin:10px 0}
-.alert-success{background:#d4edda;color:#155724}
-.alert-info{background:#d1ecf1;color:#0c5460}
-
+.alert-info{background:#d1ecf1;color:#0c5460;padding:12px;border-radius:6px;margin:10px 0}
 @media (max-width:768px){
   table{font-size:0.85rem}
   th,td{padding:8px}
@@ -115,43 +107,19 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
 
 <div class="container">
 
-<!-- PUBLIC DASHBOARD -->
 <div id="public" class="tab">
   <div class="card">
     <h3><span class="live-indicator"></span> Live Project Dashboard</h3>
     <div class="grid">
-      <div class="stat-card">
-        <h3 id="activeProjects">0</h3>
-        <small>Active Projects</small>
-      </div>
-      <div class="stat-card">
-        <h3 id="activeSuppliers">0</h3>
-        <small>Local Suppliers</small>
-      </div>
-      <div class="stat-card">
-        <h3 id="paidOut">R0</h3>
-        <small>Paid to SMMEs</small>
-      </div>
-      <div class="stat-card">
-        <h3 id="localSpend">0%</h3>
-        <small>Local Spend Target</small>
-      </div>
+      <div class="stat-card"><h3 id="activeProjects">0</h3><small>Active Projects</small></div>
+      <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Local Suppliers</small></div>
+      <div class="stat-card"><h3 id="paidOut">R0</h3><small>Paid to SMMEs</small></div>
+      <div class="stat-card"><h3 id="localSpend">0%</h3><small>Local Spend Target</small></div>
     </div>
-    <div class="alert alert-info">All data updates in real-time. No hidden invoices. Click 'Payments' to see details.</div>
-  </div>
-
-  <div class="card">
-    <h3>Recent Activity</h3>
-    <table id="activityTable">
-      <thead>
-        <tr><th>Date</th><th>Project</th><th>Activity</th><th>Status</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="alert-info">All data updates in real-time. Click 'Payments' to see details.</div>
   </div>
 </div>
 
-<!-- PROJECTS TAB -->
 <div id="projects" class="tab hidden">
   <div class="card">
     <h3>Active Projects</h3>
@@ -159,109 +127,52 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
       <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
     </div>
     <table id="projectsTable">
-      <thead>
-        <tr><th>Project</th><th>Mine/Client</th><th>Value</th><th>Progress</th><th>Status</th></tr>
-      </thead>
+      <thead><tr><th>Project</th><th>Mine/Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
 </div>
 
-<!-- SUPPLIERS TAB -->
 <div id="suppliers" class="tab hidden">
   <div class="card">
     <h3>Supplier Directory</h3>
-    <p>Local SMMEs working on our SLP projects. All compliant and verified.</p>
     <div id="supplierAdmin" class="hidden">
       <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
     </div>
     <table id="suppliersTable">
-      <thead>
-        <tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr>
-      </thead>
+      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
 </div>
 
-<!-- PAYMENTS TAB -->
 <div id="payments" class="tab hidden">
   <div class="card">
     <h3>Payment Tracker</h3>
-    <p>Full transparency on payments to suppliers. Mines and suppliers can verify.</p>
     <div id="paymentAdmin" class="hidden">
       <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
     </div>
     <table id="paymentsTable">
-      <thead>
-        <tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th></tr>
-      </thead>
+      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
 </div>
 
-<!-- ABOUT TAB -->
 <div id="about" class="tab hidden">
   <div class="card">
     <h3>Why This Portal Exists</h3>
-    <p>SLP projects fail when money and information disappear. This portal puts everything in the open:</p>
-    <ul>
-      <li><strong>For Mines:</strong> See exactly where SLP money goes, in real-time.</li>
-      <li><strong>For Suppliers:</strong> Track your payment status without calling 10 times.</li>
-      <li><strong>For Community:</strong> Verify that local SMMEs are actually benefiting.</li>
-    </ul>
-    <div class="alert alert-success">Contact: twinz.cooperate.services@gmail.com | Directors: Nkuna Thabang Given, Nkuna Thabo Johannes</div>
+    <p>SLP projects fail when money and information disappear. This portal puts everything in the open.</p>
+    <p>Contact: twinz.cooperate.services@gmail.com</p>
   </div>
 </div>
 
-</div>
-
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('loginModal')"></div>
-  <div class="modal-content">
-    <h3>Partner Login</h3>
-    <p>Use 'admin' / 'twinz2026' for admin access. Suppliers use company name as password for demo.</p>
-    <input type="text" id="username" placeholder="Username/Company" style="width:100%;margin:10px 0">
-    <input type="password" id="password" placeholder="Password" style="width:100%;margin:10px 0">
-    <button class="btn-primary" onclick="login()" style="width:100%">Login</button>
-    <button type="button" onclick="closeModal('loginModal')" style="width:100%;margin-top:10px">Cancel</button>
-  </div>
-</div>
-
-<!-- PROJECT MODAL -->
-<div id="projectModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
-  <div class="modal-content">
-    <h3>Add Project</h3>
-    <input type="text" id="pName" placeholder="Project Name" style="width:100%;margin:8px 0">
-    <input type="text" id="pClient" placeholder="Mine/Client" style="width:100%;margin:8px 0">
-    <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
-    <input type="number" id="pProgress" placeholder="Progress %" style="width:100%;margin:8px 0">
-    <button class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
-    <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
-  </div>
-</div>
-
-<!-- SUPPLIER MODAL -->
-<div id="supplierModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('supplierModal')"></div>
-  <div class="modal-content">
-    <h3>Add Supplier</h3>
-    <input type="text" id="sName" placeholder="Company Name" style="width:100%;margin:8px 0">
-    <input type="text" id="sService" placeholder="Service" style="width:100%;margin:8px 0">
-    <input type="text" id="sArea" placeholder="Area" style="width:100%;margin:8px 0">
-    <input type="text" id="sCidb" placeholder="CIDB Grade" style="width:100%;margin:8px 0">
-    <button class="btn-primary" onclick="addSupplier()" style="width:100%">Save Supplier</button>
-    <button type="button" onclick="closeModal('supplierModal')" style="width:100%;margin-top:10px">Cancel</button>
-  </div>
 </div>
 
 <!-- PAYMENT MODAL -->
 <div id="paymentModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
-  <div class="modal-content">
+  <div class="modal-content" onclick="event.stopPropagation()">
     <h3>Log Payment</h3>
     <select id="paySupplier" style="width:100%;margin:8px 0">
       <option value="">Select Supplier</option>
@@ -275,20 +186,52 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
       <option value="approved">Approved</option>
       <option value="paid">Paid</option>
     </select>
-    <button class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
+    <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
     <button type="button" onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
-<footer style="text-align:center;padding:20px;color:#666;font-size:0.9rem">
-  © 2026 Twinz Cooperate Services | Transparency builds trust
-</footer>
+<!-- OTHER MODALS -->
+<div id="projectModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3>Add Project</h3>
+    <input type="text" id="pName" placeholder="Project Name" style="width:100%;margin:8px 0">
+    <input type="text" id="pClient" placeholder="Mine/Client" style="width:100%;margin:8px 0">
+    <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
+    <input type="number" id="pProgress" placeholder="Progress %" style="width:100%;margin:8px 0">
+    <button type="button" class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
+    <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
+  </div>
+</div>
+
+<div id="supplierModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('supplierModal')"></div>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3>Add Supplier</h3>
+    <input type="text" id="sName" placeholder="Company Name" style="width:100%;margin:8px 0">
+    <input type="text" id="sService" placeholder="Service" style="width:100%;margin:8px 0">
+    <input type="text" id="sArea" placeholder="Area" style="width:100%;margin:8px 0">
+    <input type="text" id="sCidb" placeholder="CIDB Grade" style="width:100%;margin:8px 0">
+    <button type="button" class="btn-primary" onclick="addSupplier()" style="width:100%">Save Supplier</button>
+    <button type="button" onclick="closeModal('supplierModal')" style="width:100%;margin-top:10px">Cancel</button>
+  </div>
+</div>
+
+<div id="loginModal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeModal('loginModal')"></div>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3>Partner Login</h3>
+    <input type="text" id="username" placeholder="Username" style="width:100%;margin:10px 0">
+    <input type="password" id="password" placeholder="Password" style="width:100%;margin:10px 0">
+    <button type="button" class="btn-primary" onclick="login()" style="width:100%">Login</button>
+    <button type="button" onclick="closeModal('loginModal')" style="width:100%;margin-top:10px">Cancel</button>
+  </div>
+</div>
 
 <script>
-let currentUser = null;
 let isAdmin = false;
 
-// Initialize with sample data if empty
 if(!localStorage.getItem('twinz_projects')){
   localStorage.setItem('twinz_projects', JSON.stringify([
     {id:1,name:'Community Fence - Mine A',client:'Mine A',value:850000,progress:60,status:'active'},
@@ -303,8 +246,7 @@ if(!localStorage.getItem('twinz_suppliers')){
 }
 if(!localStorage.getItem('twinz_payments')){
   localStorage.setItem('twinz_payments', JSON.stringify([
-    {id:1,supplierId:1,projectId:1,amount:250000,status:'paid',date:'2026-09-01'},
-    {id:2,supplierId:2,projectId:2,amount:180000,status:'approved',date:'2026-09-15'}
+    {id:1,supplierId:1,projectId:1,amount:250000,status:'paid',date:'2026-09-01'}
   ]));
 }
 
@@ -321,17 +263,14 @@ function renderAll(){
   renderSuppliers();
   renderPayments();
   renderStats();
-  renderActivity();
 }
 
 function renderStats(){
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
   const payments = JSON.parse(localStorage.getItem('twinz_payments'));
-
   document.getElementById('activeProjects').textContent = projects.length;
   document.getElementById('activeSuppliers').textContent = suppliers.length;
-
   const paid = payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
   document.getElementById('paidOut').textContent = 'R' + paid.toLocaleString();
   document.getElementById('localSpend').textContent = '80%';
@@ -339,29 +278,15 @@ function renderStats(){
 
 function renderProjects(){
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  const tbody = document.querySelector('#projectsTable tbody');
-  tbody.innerHTML = projects.map(p=>`
-    <tr>
-      <td>${p.name}</td>
-      <td>${p.client}</td>
-      <td>R${p.value.toLocaleString()}</td>
-      <td>${p.progress}%</td>
-      <td><span class="status approved">${p.status}</span></td>
-    </tr>
+  document.querySelector('#projectsTable tbody').innerHTML = projects.map(p=>`
+    <tr><td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td><td>${p.progress}%</td><td><span class="status approved">${p.status}</span></td></tr>
   `).join('');
 }
 
 function renderSuppliers(){
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const tbody = document.querySelector('#suppliersTable tbody');
-  tbody.innerHTML = suppliers.map(s=>`
-    <tr>
-      <td>${s.name}</td>
-      <td>${s.service}</td>
-      <td>${s.area}</td>
-      <td><span class="badge">${s.cidb}</span></td>
-      <td><span class="status compliant">${s.status}</span></td>
-    </tr>
+  document.querySelector('#suppliersTable tbody').innerHTML = suppliers.map(s=>`
+    <tr><td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td>${s.cidb}</td><td><span class="status paid">${s.status}</span></td></tr>
   `).join('');
 }
 
@@ -369,45 +294,19 @@ function renderPayments(){
   const payments = JSON.parse(localStorage.getItem('twinz_payments'));
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-
-  const tbody = document.querySelector('#paymentsTable tbody');
-  tbody.innerHTML = payments.map(p=>{
+  document.querySelector('#paymentsTable tbody').innerHTML = payments.map(p=>{
     const s = suppliers.find(x=>x.id===p.supplierId);
     const pr = projects.find(x=>x.id===p.projectId);
-    return `
-      <tr>
-        <td>${p.date}</td>
-        <td>${s?s.name:'-'}</td>
-        <td>${pr?pr.name:'-'}</td>
-        <td>R${p.amount.toLocaleString()}</td>
-        <td><span class="status ${p.status}">${p.status}</span></td>
-        <td><a href="#">View</a></td>
-      </tr>
-    `;
+    return `<tr><td>${p.date}</td><td>${s?s.name:'-'}</td><td>${pr?pr.name:'-'}</td><td>R${p.amount.toLocaleString()}</td><td><span class="status ${p.status}">${p.status}</span></td></tr>`;
   }).join('');
 }
 
-function renderActivity(){
-  const activities = [
-    ['2026-09-15','Water Pipeline','Payment approved to Water Tech SMME','approved'],
-    ['2026-09-01','Community Fence','Payment sent to Limpopo Civils','paid'],
-    ['2026-08-28','Community Fence','Supplier onboarded','approved']
-  ];
-  const tbody = document.querySelector('#activityTable tbody');
-  tbody.innerHTML = activities.map(a=>`
-    <tr>
-      <td>${a[0]}</td>
-      <td>${a[1]}</td>
-      <td>${a[2]}</td>
-      <td><span class="status ${a[3]}">${a[3]}</span></td>
-    </tr>
-  `).join('');
-}
-
 function openLogin(){document.getElementById('loginModal').classList.remove('hidden')}
+
 function closeModal(id){
-  document.getElementById(id).classList.add('hidden');
   const modal = document.getElementById(id);
+  if(!modal) return;
+  modal.classList.add('hidden');
   modal.querySelectorAll('input, select').forEach(el => {
     if(el.tagName === 'SELECT') el.selectedIndex = 0;
     else el.value = '';
@@ -417,20 +316,16 @@ function closeModal(id){
 function login(){
   const u = document.getElementById('username').value;
   const p = document.getElementById('password').value;
-
   if(u==='admin' && p==='twinz2026'){
     isAdmin=true;
-    currentUser='Admin';
     document.getElementById('loginBtn').textContent='Logout';
     document.getElementById('adminControls').classList.remove('hidden');
     document.getElementById('supplierAdmin').classList.remove('hidden');
     document.getElementById('paymentAdmin').classList.remove('hidden');
     closeModal('loginModal');
-    alert('Admin login successful');
   }else if(u){
-    currentUser=u;
     closeModal('loginModal');
-    alert('Welcome '+u+'. You can view your project and payment status.');
+    alert('Welcome '+u);
   }
   renderAll();
 }
@@ -441,28 +336,14 @@ function openSupplierModal(){document.getElementById('supplierModal').classList.
 function openPaymentModal(){
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-
-  document.getElementById('paySupplier').innerHTML =
-    '<option value="">Select Supplier</option>' +
-    suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-
-  document.getElementById('payProject').innerHTML =
-    '<option value="">Select Project</option>' +
-    projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
-
+  document.getElementById('paySupplier').innerHTML = '<option value="">Select Supplier</option>' + suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  document.getElementById('payProject').innerHTML = '<option value="">Select Project</option>' + projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
   document.getElementById('paymentModal').classList.remove('hidden');
 }
 
 function addProject(){
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  projects.push({
-    id:Date.now(),
-    name:document.getElementById('pName').value,
-    client:document.getElementById('pClient').value,
-    value:parseInt(document.getElementById('pValue').value),
-    progress:parseInt(document.getElementById('pProgress').value),
-    status:'active'
-  });
+  projects.push({id:Date.now(),name:document.getElementById('pName').value,client:document.getElementById('pClient').value,value:parseInt(document.getElementById('pValue').value),progress:parseInt(document.getElementById('pProgress').value),status:'active'});
   localStorage.setItem('twinz_projects',JSON.stringify(projects));
   closeModal('projectModal');
   renderAll();
@@ -470,14 +351,7 @@ function addProject(){
 
 function addSupplier(){
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  suppliers.push({
-    id:Date.now(),
-    name:document.getElementById('sName').value,
-    service:document.getElementById('sService').value,
-    area:document.getElementById('sArea').value,
-    cidb:document.getElementById('sCidb').value,
-    status:'verified'
-  });
+  suppliers.push({id:Date.now(),name:document.getElementById('sName').value,service:document.getElementById('sService').value,area:document.getElementById('sArea').value,cidb:document.getElementById('sCidb').value,status:'verified'});
   localStorage.setItem('twinz_suppliers',JSON.stringify(suppliers));
   closeModal('supplierModal');
   renderAll();
@@ -487,21 +361,9 @@ function addPayment(){
   const supplierId = document.getElementById('paySupplier').value;
   const projectId = document.getElementById('payProject').value;
   const amount = document.getElementById('payAmount').value;
-
-  if(!supplierId ||!projectId ||!amount){
-    alert('Please fill all fields');
-    return;
-  }
-
+  if(!supplierId ||!projectId ||!amount){alert('Please fill all fields');return;}
   const payments = JSON.parse(localStorage.getItem('twinz_payments'));
-  payments.push({
-    id:Date.now(),
-    supplierId:parseInt(supplierId),
-    projectId:parseInt(projectId),
-    amount:parseInt(amount),
-    status:document.getElementById('payStatus').value,
-    date:new Date().toISOString().split('T')[0]
-  });
+  payments.push({id:Date.now(),supplierId:parseInt(supplierId),projectId:parseInt(projectId),amount:parseInt(amount),status:document.getElementById('payStatus').value,date:new Date().toISOString().split('T')[0]});
   localStorage.setItem('twinz_payments',JSON.stringify(payments));
   closeModal('paymentModal');
   renderAll();
