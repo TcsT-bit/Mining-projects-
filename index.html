@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - MineSLP Compliance Portal</title>
+<title>Twinz Cooperate Services - MineSLP Compliance Partner</title>
+<meta property="og:title" content="Twinz Cooperate Services - Mining SLP Compliance Partner">
+<meta property="og:description" content="Compliant, transparent, and partner-focused for mining SLP projects in Limpopo.">
+<meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
+<link rel="icon" href="logo.png">
 <style>
 :root{
   --green:#007A4D;
@@ -16,6 +20,7 @@
   --text:#222;
 }
 *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text)}
 header{
   background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);
@@ -44,8 +49,8 @@ header{
   font-size:0.9rem
 }
 .download-btn:hover{background:#e6a619}
-nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
-nav button{flex:1;padding:10px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap}
+nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav button{flex:0 0 auto;padding:10px 16px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap;font-weight:600}
 nav button.active{background:var(--green);color:#fff}
 .container{padding:16px;max-width:900px;margin:auto}
 .card{
@@ -81,15 +86,20 @@ ul{margin:8px 0 8px 20px}
 .track-record-item{border:1px solid #ddd;border-radius:8px;padding:12px;margin:10px 0}
 .guarantee-box{background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0}
 .contact-box{background:#f8f9fa;padding:12px;border-radius:8px;margin-top:12px}
+.badges{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.badge{padding:10px 15px;border:1px solid #ddd;border-radius:8px;background:#fff;font-weight:bold;font-size:0.9rem}
+.btn-primary{display:inline-block;background:var(--green);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:10px}
+.map-container{height:200px;background:#e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666;margin-top:10px}
 
 @media print {
   header, nav,.download-btn {display:none}
   body{margin:0;background:#fff}
-.card{box-shadow:none;border:1px solid #ddd}
+ .card{box-shadow:none;border:1px solid #ddd}
   @page {margin:20mm}
 @media (max-width:600px){
-.header-content{flex-direction:column;gap:8px}
-.download-btn{position:static;transform:none;margin-top:10px}
+ .header-content{flex-direction:column;gap:8px}
+ .download-btn{position:static;transform:none;margin-top:10px}
+ .badges{flex-direction:column;align-items:stretch}
 </style>
 </head>
 <body>
@@ -108,7 +118,8 @@ ul{margin:8px 0 8px 20px}
 <nav>
   <button class="active" onclick="showTab('overview')">Overview</button>
   <button onclick="showTab('code')">Code of Practice</button>
-  <button onclick="showTab('compliance')">Compliance Check</button>
+  <button onclick="showTab('compliance')">Compliance</button>
+  <button onclick="showTab('partners')">Partners</button>
   <button onclick="showTab('projects')">Capacity</button>
   <button onclick="showTab('trackrecord')">Track Record</button>
 </nav>
@@ -136,7 +147,7 @@ ul{margin:8px 0 8px 20px}
         <small>Active</small>
       </div>
     </div>
-    <div class="status info">New Entrant to Mining SLP - Proven in Construction & Infrastructure</div>
+    <div class="status info">New to Mining SLP. Proven in Construction & Infrastructure. Partnering with experienced contractors to de-risk delivery.</div>
 
     <div class="contact-box">
       <h4>Directors</h4>
@@ -144,16 +155,33 @@ ul{margin:8px 0 8px 20px}
       Nkuna Thabo Johannes</p>
       <p><strong>Email:</strong> twinz.cooperate.services@gmail.com</p>
     </div>
+
+    <h4 style="margin-top:20px">How We Work</h4>
+    <ul>
+      <li><strong>Transparent pricing:</strong> Open BOQ. No hidden markups.</li>
+      <li><strong>Local first:</strong> 80% local labor target, SMME mentorship.</li>
+      <li><strong>No drama:</strong> We flag issues early and deliver what we promise.</li>
+    </ul>
+
+    <div class="badges">
+      <div class="badge">CIPC Registered</div>
+      <div class="badge">CIDB Registered</div>
+      <div class="badge">Tax Compliant</div>
+      <div class="badge">COIDA Active</div>
+    </div>
+
+    <div class="map-container">
+      Based in Limpopo. Projects in Capricorn & Waterberg Districts
+    </div>
   </div>
 
   <div class="card">
-    <h3>Why Mines Should Consider Us</h3>
+    <h3>Why Mines & Contractors Work With Us</h3>
     <ul>
       <li><strong>Zero Legacy Issues:</strong> No blacklisting, no failed projects, no corruption history</li>
-      <li><strong>Systems First:</strong> We’ve built our processes around transparency from day 1</li>
-      <li><strong>Flexible & Hungry:</strong> We take SLP compliance seriously because our reputation depends on it</li>
+      <li><strong>Systems First:</strong> Processes built around transparency from day 1</li>
       <li><strong>Risk Covered:</strong> Performance guarantee and completion commitment in every contract</li>
-      <li><strong>Local Focus:</strong> Limpopo-based, prioritize local labor and SMME partnerships</li>
+      <li><strong>Local Focus:</strong> Prioritize local labor and SMME partnerships per SLP targets</li>
     </ul>
   </div>
 </div>
@@ -204,13 +232,6 @@ ul{margin:8px 0 8px 20px}
       </ul>
     </div>
 
-    <h4>7. Local Empowerment</h4>
-    <ul>
-      <li>Prioritize local labor, SMMEs, and suppliers per SLP targets</li>
-      <li>Participate in community engagement sessions</li>
-      <li>Uphold health, safety, and environmental standards</li>
-    </ul>
-
     <div class="signature">
       <div>Signed: ___________________</div>
       <p>Date: ___________________<br>
@@ -218,12 +239,6 @@ ul{margin:8px 0 8px 20px}
       Director: Nkuna Thabo Johannes<br>
       Twinz Cooperate Services (Pty) Ltd<br>
       CIDB No: [Add CIDB No]</p>
-    </div>
-
-    <div class="footer clearfix">
-      <span class="footer-left">Document: TCS-COP-SLP-001</span>
-      <span>Version: 1.0</span>
-      <span class="footer-right">Issue Date: October 2025</span>
     </div>
   </div>
 </div>
@@ -261,6 +276,42 @@ ul{margin:8px 0 8px 20px}
   </div>
 </div>
 
+<div id="partners" class="tab hidden">
+  <div class="card">
+    <h3>Partner with Twinz on Mining SLP Projects</h3>
+    <p>We win SLP tenders and subcontract delivery to experienced contractors. You focus on execution, we handle the mine interface, compliance, and admin.</p>
+
+    <h4>Why contractors work with us</h4>
+    <ul>
+      <li><strong>Steady pipeline:</strong> We only bid on SLP projects in Limpopo.</li>
+      <li><strong>Fast payment:</strong> 14 days after mine payment clears.</li>
+      <li><strong>Clean scope:</strong> Clear BOQ split. No surprises, no scope creep.</li>
+      <li><strong>No client poaching:</strong> We’re not building a direct client list. We’re your SLP partner.</li>
+    </ul>
+
+    <h4>What we subcontract</h4>
+    <div class="grid">
+      <div class="stat-card"><strong>Civil Works</strong><br><small>Roads, fencing, structures</small></div>
+      <div class="stat-card"><strong>Water & Sanitation</strong><br><small>Boreholes, pipelines</small></div>
+      <div class="stat-card"><strong>Building</strong><br><small>Community facilities</small></div>
+      <div class="stat-card"><strong>Maintenance</strong><br><small>Ongoing SLP work</small></div>
+    </div>
+
+    <h4>Get on our subcontractor list</h4>
+    <p>Email us at <strong>twinz.cooperate.services@gmail.com</strong> with:</p>
+    <ul>
+      <li>CIDB grade and certificate</li>
+      <li>Past project list with references</li>
+      <li>Plant and crew capacity</li>
+      <li>COIDA and tax compliance</li>
+    </ul>
+
+    <div class="status info">We respond within 48 hours to qualified partners.</div>
+
+    <a href="#" class="btn-primary" onclick="alert('Upload a 1-page Subcontractor Pack PDF as subcontractor-pack.pdf and replace this link')">Download Subcontractor Pack</a>
+  </div>
+</div>
+
 <div id="projects" class="tab hidden">
   <div class="card">
     <h3>Our Capacity for Mining SLP Work</h3>
@@ -281,7 +332,7 @@ ul{margin:8px 0 8px 20px}
 <div id="trackrecord" class="tab hidden">
   <div class="card">
     <h3>Track Record - Relevant Experience</h3>
-    <p class="status warning">Note: Twinz Cooperate Services is a new entrant to mining SLP work.
+    <p class="status warning">Note: Twinz Cooperate Services is new to mining SLP work.
     Below are relevant construction/infrastructure projects completed. All documentation available for verification.</p>
 
     <div class="track-record-item">
@@ -290,19 +341,12 @@ ul{margin:8px 0 8px 20px}
       <strong>Scope:</strong> [e.g. Community Fence, Road Maintenance]<br>
       <strong>Value:</strong> R[Amount] | <strong>Completed:</strong> [Date]<br>
       <strong>Status:</strong> <span class="status compliant">Completed & Handed Over</span></p>
-      <p>Scope matches typical mining SLP requirements: quality control, local labor, reporting.</p>
     </div>
 
     <div class="track-record-item">
       <h4>Subcontractor Experience</h4>
       <p>We have worked as subcontractors on [Project Type] for [Main Contractor].
       This gives us exposure to mine-style reporting and QA/QC processes.</p>
-    </div>
-
-    <div class="status info" style="margin-top:16px">
-      <strong>Our Honest Pitch:</strong> We haven’t done mining SLP before.
-      That means no bad habits, no shortcuts, and full focus on getting your project right
-      so we can build a reference you’ll be proud of.
     </div>
   </div>
 
@@ -329,9 +373,6 @@ function showTab(tab){
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
 }
-
-// Auto-update date in footer
-document.querySelector('.footer-right').textContent = 'Issue Date: ' + new Date().toLocaleDateString('en-ZA', {month: 'long', year: 'numeric'});
 </script>
 </body>
 </html>
