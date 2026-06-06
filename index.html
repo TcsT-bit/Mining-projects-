@@ -70,6 +70,8 @@ tr:hover{background:#fafafa}
 .challenge-box{background:#0a3d62;color:#fff;padding:15px;border-radius:8px;margin:15px 0;font-weight:bold}
 .mission-box{background:#fff3cd;border-left:4px solid var(--gold);padding:15px;margin:15px 0}
 .small-note{font-size:0.85rem;color:var(--muted);margin-top:8px}
+.problem-table th{background:#0a3d62;color:#fff}
+.letter-template{border:1px dashed #ccc;padding:20px;background:#fafafa;margin-top:15px}
 
 @media print {
   header, nav,.download-btn {display:none}
@@ -104,6 +106,7 @@ tr:hover{background:#fafafa}
   <button onclick="showTab('projects')">Projects</button>
   <button onclick="showTab('suppliers')">Suppliers</button>
   <button onclick="showTab('partners')">Partners</button>
+  <button onclick="showTab('partnerletter')">Partner Letter</button>
   <button onclick="showTab('compliance')">Compliance</button>
   <button onclick="showTab('code')">Guarantee</button>
 </nav>
@@ -121,7 +124,55 @@ tr:hover{background:#fafafa}
       <p>Twinz was built to force transparency, delivery, and real benefit from mining SLP spend. We have no legacy issues because we have no legacy. What we have is a system that works, partners who execute, and a commitment to report everything openly.</p>
     </div>
 
-    <h3><span class="live-indicator"></span> Live SLP Transparency Dashboard</h3>
+    <div class="card" style="box-shadow:none;border:1px solid #ddd;margin-top:20px">
+      <h3>The Problem We Solve</h3>
+      <p><strong>Public data shows SLP monitoring and delivery are failing in Limpopo:</strong></p>
+      <ul>
+        <li>DMRE has poor record management and cannot enforce compliance, resulting in communities feeling abandoned【7455358906530438142†L53-L55】</li>
+        <li>Sefateng Chrome Mine was flagged for not submitting annual compliance reports, in direct contravention of mining legislation【7455358906530438142†L49-L52】</li>
+        <li>Researchers recommend that all company SLP reports be publicly disclosed to employees, communities, and stakeholders【7455358906530438142†L57-L59】</li>
+      </ul>
+
+      <table class="problem-table">
+        <thead>
+          <tr>
+            <th>Failure Point</th>
+            <th>What Happens</th>
+            <th>How Twinz Prevents It</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>No monitoring by DMRE</strong></td>
+            <td>DMRE lacks resources to check compliance. Mines delay and miss targets</td>
+            <td>Weekly open reporting dashboard. Mine, community, and DMRE see BOQ, photos, test results live.</td>
+          </tr>
+          <tr>
+            <td><strong>No reports submitted</strong></td>
+            <td>Mines fail to submit annual compliance reports</td>
+            <td>Automated SLP compliance pack generated monthly from live data. Submit on time, every time.</td>
+          </tr>
+          <tr>
+            <td><strong>No public transparency</strong></td>
+            <td>Communities don’t see SLP docs, leading to protests when nothing happens</td>
+            <td>Community view access to project dashboard. Delivery is visible, protests drop.</td>
+          </tr>
+          <tr>
+            <td><strong>Wrong contractor, no guarantee</strong></td>
+            <td>Mines use under-graded contractors. Projects fail with no money to fix it.</td>
+            <td>Execution by verified CIDB 6+ partners with performance guarantee before work starts.</td>
+          </tr>
+          <tr>
+            <td><strong>No local buy-in</strong></td>
+            <td>Projects done outside community, don’t last.</td>
+            <td>80% local labor and SMME procurement tracked live in every BOQ.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small-note">Source: Amnesty International & Centre for Applied Legal Studies report on Twickenham, Marula, and Sefateng mines, 2024</p>
+    </div>
+
+    <h3 style="margin-top:20px"><span class="live-indicator"></span> Live SLP Transparency Dashboard</h3>
     <div class="grid">
       <div class="stat-card"><h3>8</h3><small>Target SLP Projects</small></div>
       <div class="stat-card"><h3>7</h3><small>Local SMME Partners</small></div>
@@ -224,6 +275,74 @@ tr:hover{background:#fafafa}
 
     <div class="status info">Qualified partners get project scopes within 48 hours.</div>
     <a href="#" class="btn-primary" onclick="alert('Upload partner-pack.pdf to replace this link')">Download Partner Pack</a>
+  </div>
+</div>
+
+<!-- NEW PARTNER LETTER TAB -->
+<div id="partnerletter" class="tab hidden">
+  <div class="card">
+    <h3>Partner Letter Template</h3>
+    <p>Send this 1-page letter to CIDB 6+ contractors to lock your execution partner. Edit the [BRACKETS] and send for signature.</p>
+
+    <div class="letter-template">
+      <p style="text-align:right"><strong>Date:</strong> [DD/MM/YYYY]</p>
+
+      <p><strong>To:</strong> Procurement / SLP Manager<br>
+      [Mine/Company Name]<br>
+      [Mine Address]</p>
+
+      <h4 style="text-align:center;margin:20px 0">LETTER OF INTENT – SLP PROJECT EXECUTION PARTNERSHIP</h4>
+
+      <p>Dear Sir/Madam,</p>
+
+      <p><strong>Re: Partnership Agreement between [Partner Company Name] and Twinz Cooperate Services (Pty) Ltd</strong></p>
+
+      <p>[Partner Company Name], CIDB Grade [6/7/8/9] Registration No. [CIDB No.], hereby confirms our intent to partner with Twinz Cooperate Services (Pty) Ltd, Reg No. 2024/444303/07, for the execution of Social and Labour Plan projects in Limpopo.</p>
+
+      <p><strong>Our Agreement:</strong></p>
+      <ul>
+        <li>Twinz Cooperate Services will secure SLP contracts, manage mine interface, local procurement, and compliance reporting.</li>
+        <li>[Partner Company Name] will act as the executing contractor for civil, construction, and engineering works as per approved BOQ and specifications.</li>
+        <li>[Partner Company Name] will issue the required performance guarantee and carry execution risk for the works.</li>
+        <li>Payment to [Partner Company Name] will be made within 14 days of mine payment clearing to Twinz Cooperate Services.</li>
+      </ul>
+
+      <p><strong>Our Commitment:</strong></p>
+      <p>We confirm that we have the plant, personnel, and financial capacity to execute SLP projects to SANS standards and within agreed timelines. All works will be executed in compliance with MHSA, OHSA, CIDB, and DMRE regulations.</p>
+
+      <p>This letter is valid for 90 days from the date above and is subject to a formal subcontractor agreement on award.</p>
+
+      <div class="signature">
+        <div>_________________________</div>
+        <p><strong>Authorized Signatory</strong><br>
+        [Partner Company Name]<br>
+        Name: [Full Name]<br>
+        Position: [Director/MD]<br>
+        Contact: [Phone/Email]<br>
+        CIDB Grade: [Grade] | Reg No: [CIDB No.]</p>
+      </div>
+
+      <div class="signature" style="margin-left:50%">
+        <div>_________________________</div>
+        <p><strong>Authorized Signatory</strong><br>
+        Twinz Cooperate Services (Pty) Ltd<br>
+        Name: [Your Name]<br>
+        Position: Director</p>
+      </div>
+    </div>
+
+    <div class="guarantee-box" style="margin-top:20px">
+      <strong>How to use this:</strong>
+      <ol>
+        <li>Find a CIDB 6+ contractor in Limpopo with capacity</li>
+        <li>Fill in their details and yours</li>
+        <li>Get it signed and stamped on company letterhead</li>
+        <li>Upload to your compliance folder and show mines during verification</li>
+      </ol>
+      <p class="small-note">This letter alone doesn’t bind you. It proves to the mine you have an execution partner before award.</p>
+    </div>
+
+    <button class="btn-primary" onclick="window.print()">Download/Print Letter</button>
   </div>
 </div>
 
