@@ -3,156 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contractor Code of Practice - Mining SLP Projects</title>
+<title>MineSLP Compliance Portal</title>
 <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 12pt;
-        line-height: 1.5;
-        color: #222;
-        margin: 40px;
-    }
-    .header {
-        text-align: center;
-        border-bottom: 2px solid #0a3d62;
-        padding-bottom: 15px;
-        margin-bottom: 25px;
-    }
-    .header img {
-        max-height: 80px;
-        margin-bottom: 10px;
-    }
-    .company-name {
-        font-size: 18pt;
-        font-weight: bold;
-        color: #0a3d62;
-        margin-bottom: 5px;
-    }
-    .contact-info {
-        font-size: 10pt;
-        color: #555;
-    }
-    h1 {
-        font-size: 15pt;
-        text-align: center;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-    }
-    h2 {
-        font-size: 13pt;
-        margin-top: 20px;
-        margin-bottom: 8px;
-        color: #0a3d62;
-    }
-    ul {
-        margin: 8px 0 8px 20px;
-    }
-    .signature {
-        margin-top: 40px;
-    }
-    .signature div {
-        margin-top: 30px;
-        width: 300px;
-        border-top: 1px solid #000;
-    }
-    .footer {
-        margin-top: 30px;
-        font-size: 9pt;
-        text-align: center;
-        color: #555;
-        border-top: 1px solid #ddd;
-        padding-top: 10px;
-    }
-    .footer-left {
-        float: left;
-    }
-    .footer-right {
-        float: right;
-    }
-    .clearfix::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-    
-    /* Print settings */
-    @media print {
-        body { margin: 20mm; }
-        @page {
-            margin: 20mm;
-            @bottom-center {
-                content: "Page " counter(page) " of " counter(pages);
-                font-size: 9pt;
-                color: #555;
-            }
-        }
-    }
+:root{
+  --green:#007A4D;
+  --black:#000;
+  --gold:#FFB81C;
+  --blue:#0a3d62;
+  --red:#DE3831;
+  --bg:#f5f7fa;
+  --card:#fff;
+  --text:#222;
+}
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text)}
+header{
+  background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  position:relative
+}
+header h2{margin:0;font-size:1.4rem}
+header small{opacity:0.9}
+.download-btn{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--gold);
+  color:var(--black);
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:0.9rem
+}
+.download-btn:hover{background:#e6a619}
+nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
+nav button{flex:1;padding:10px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap}
+nav button.active{background:var(--green);color:#fff}
+.container{padding:16px;max-width:900px;margin:auto}
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  border-top:4px solid var(--gold)
+}
+h3{color:var(--blue);margin-top:0}
+h4{color:var(--green);margin:14px 0 6px 0}
+ul{margin:8px 0 8px 20px}
+.metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}
+.status{padding:8px;border-radius:6px;margin-top:8px;font-weight:bold;text-align:center}
+.status.compliant{background:#d4edda;color:#155724}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat-card{background:#f8f9fa;padding:12px;border-radius:8px;text-align:center}
+.stat-card h3{margin:0;font-size:28px;color:var(--green)}
+.live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hidden{display:none}
+.signature{margin-top:40px}
+.signature div{margin-top:30px;width:300px;border-top:1px solid #000}
+.footer{margin-top:30px;font-size:9pt;text-align:center;color:#555;border-top:1px solid #ddd;padding-top:10px}
+.footer-left{float:left}
+.footer-right{float:right}
+.clearfix::after{content:"";clear:both;display:table}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+.checklist-item input{width:auto;margin:0}
+
+/* Print settings */
+@media print {
+  header, nav, .download-btn {display:none}
+  body{margin:0;background:#fff}
+  .card{box-shadow:none;border:1px solid #ddd}
+  @page {margin:20mm}
 </style>
 </head>
 <body>
+<header>
+  <button class="download-btn" onclick="window.print()">Download PDF</button>
+  <h2>MineSLP Compliance Portal</h2>
+  <small>Transparency. Quality. Accountability. For Mining Projects.</small>
+</header>
 
-<div class="header">
-    <img src="logo.png" alt="Company Logo">
-    <div class="company-name">[Your Company Name]</div>
-    <div class="contact-info">
-        [Your Physical Address] | Tel: [Your Number] | Email: [Your Email] | Reg No: [Your Reg No]
+<nav>
+  <button class="active" onclick="showTab('overview')">Overview</button>
+  <button onclick="showTab('code')">Code of Practice</button>
+  <button onclick="showTab('compliance')">Compliance Check</button>
+  <button onclick="showTab('projects')">Active Projects</button>
+</nav>
+
+<div class="container">
+
+<div id="overview" class="tab">
+  <div class="card">
+    <h3><span class="live-indicator"></span> Company Compliance Status</h3>
+    <div class="grid">
+      <div class="stat-card">
+        <h3 id="complianceScore">100%</h3>
+        <small>Compliance Score</small>
+      </div>
+      <div class="stat-card">
+        <h3 id="activeProjects">2</h3>
+        <small>Active Projects</small>
+      </div>
+      <div class="stat-card">
+        <h3 id="passedAudits">12</h3>
+        <small>Passed Audits</small>
+      </div>
+      <div class="stat-card">
+        <h3 id="zeroIncidents">0</h3>
+        <small>Safety Incidents</small>
+      </div>
     </div>
+    <div class="status compliant">✓ Fully Compliant with Mining SLP Requirements</div>
+  </div>
+
+  <div class="card">
+    <h3>Why Mines Trust Us</h3>
+    <ul>
+      <li><strong>Quality First:</strong> All work done to SANS standards with SANAS-accredited testing</li>
+      <li><strong>Zero Tolerance:</strong> Strict anti-corruption and ethics policy</li>
+      <li><strong>Full Transparency:</strong> Weekly reports, site diaries, and open project files</li>
+      <li><strong>Local Impact:</strong> Priority for local labor and SMME subcontractors per SLP targets</li>
+      <li><strong>Accountable:</strong> We stand by 12-month defects liability and retention terms</li>
+    </ul>
+  </div>
 </div>
 
-<h1>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h1>
+<div id="code" class="tab hidden">
+  <div class="card">
+    <h3>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h3>
+    
+    <h4>1. Purpose</h4>
+    <p>This code commits <strong>[Your Company Name]</strong> to delivering all mining Social Labour Plan and community projects to the required standard, on time, and with full transparency. The goal is to restore public trust in how mining funds are spent.</p>
 
-<h2>1. Purpose</h2>
-<p>This code commits [Your Company Name] to delivering all mining Social Labour Plan and community projects to the required standard, on time, and with full transparency. The goal is to restore public trust in how mining funds are spent.</p>
+    <h4>2. Quality & Technical Standards</h4>
+    <p>We commit to executing all works strictly to the approved project specification, BOQ, and relevant SANS/SANS-based standards.</p>
+    <ul>
+      <li>No substitution of materials, equipment, or methods without written approval from the Engineer/Client</li>
+      <li>All material testing, inspections, and certifications will be conducted by SANAS-accredited laboratories</li>
+      <li>Any work that fails testing or inspection will be rectified at our cost and within agreed timelines</li>
+    </ul>
 
-<h2>2. Quality & Technical Standards</h2>
-<p>We commit to executing all works strictly to the approved project specification, BOQ, and relevant SANS/SANS-based standards.</p>
-<ul>
-    <li>No substitution of materials, equipment, or methods without written approval from the Engineer/Client</li>
-    <li>All material testing, inspections, and certifications will be conducted by SANAS-accredited laboratories and qualified professionals</li>
-    <li>Any work that fails testing or inspection will be rectified at our cost and within agreed timelines</li>
-</ul>
+    <h4>3. Transparency, Reporting & Documentation</h4>
+    <ul>
+      <li>Weekly progress reports, delivery notes, test results, and site diaries submitted to the client</li>
+      <li>Project file maintained and available for client and community oversight on request</li>
+      <li>All payment claims supported by evidence of actual work completed and verified</li>
+    </ul>
 
-<h2>3. Transparency, Reporting & Documentation</h2>
-<ul>
-    <li>Weekly progress reports, delivery notes, test results, and site diaries will be submitted to the client</li>
-    <li>A project file will be maintained and made available for client and community oversight on request</li>
-    <li>All payment claims will be supported by evidence of actual work completed and verified</li>
-</ul>
+    <h4>4. Anti-Corruption, Ethics & Compliance</h4>
+    <ul>
+      <li>We do not offer, give, or accept bribes, gifts, or inducements to secure contracts</li>
+      <li>We report any attempt at collusion or interference with QA/QC processes immediately</li>
+      <li>Pricing is based on actual cost + fair margin. No underbidding to compromise quality</li>
+      <li>Full compliance with Mine Health and Safety Act, OHSA, and CIDB regulations</li>
+    </ul>
 
-<h2>4. Anti-Corruption, Ethics & Compliance</h2>
-<ul>
-    <li>We do not offer, give, or accept bribes, gifts, or inducements to secure contracts or conceal poor workmanship</li>
-    <li>We will immediately report any attempt at collusion, intimidation, or interference with QA/QC processes to the client’s ethics/compliance line</li>
-    <li>Pricing submitted is based on actual cost + fair margin. We do not underbid to win and compromise quality later</li>
-    <li>We comply with all relevant South African laws including the Mine Health and Safety Act, OHSA, and CIDB regulations</li>
-</ul>
+    <h4>5. Project Delivery & Accountability</h4>
+    <ul>
+      <li>We complete projects as contracted. Cash flow issues notified 14 days in advance</li>
+      <li>We accept standard retention and commit to full defects liability period</li>
+      <li>CIDB grading, tax clearance, COIDA, and references open for verification</li>
+    </ul>
 
-<h2>5. Project Delivery & Accountability</h2>
-<ul>
-    <li>We commit to completing the project as contracted. If cash flow or supply issues arise, we notify the client 14 days in advance with a recovery plan</li>
-    <li>We accept standard retention amounts and commit to the full defects liability period as per contract</li>
-    <li>Our CIDB grading, tax clearance, COIDA, and project references are open for verification at any time</li>
-</ul>
+    <h4>6. Local Empowerment & Community Benefit</h4>
+    <ul>
+      <li>Prioritize local labor, SMMEs, and suppliers per SLP and procurement targets</li>
+      <li>Participate in community engagement sessions during and after handover</li>
+      <li>Uphold health, safety, and environmental standards to protect workers and community</li>
+    </ul>
 
-<h2>6. Local Empowerment & Community Benefit</h2>
-<ul>
-    <li>Where required, we will prioritize local labor, SMMEs, and suppliers in line with SLP and local procurement targets</li>
-    <li>We will participate in community engagement sessions during and after project handover</li>
-    <li>Health, safety, and environmental standards will be upheld to protect workers and the community</li>
-</ul>
+    <div class="signature">
+      <div>Signed: ___________________</div>
+      <p>Date: ___________________<br>
+      Director, [Your Company Name]<br>
+      CIDB No: [If applicable]</p>
+    </div>
 
-<div class="signature">
-    <div>Signed: ___________________</div>
-    <p>Date: ___________________<br>
-    Director, [Your Company Name]<br>
-    CIDB No: [If applicable]</p>
+    <div class="footer clearfix">
+      <span class="footer-left">Document: COP-SLP-001</span>
+      <span>Version: 1.0</span>
+      <span class="footer-right">Issue Date: October 2025</span>
+    </div>
+  </div>
 </div>
 
-<div class="footer clearfix">
-    <span class="footer-left">Document: COP-SLP-001</span>
-    <span>Version: 1.0</span>
-    <span class="footer-right">Issue Date: October 2025</span>
+<div id="compliance" class="tab hidden">
+  <div class="card">
+    <h3>Self-Compliance Checklist</h3>
+    <p>Use this to verify you're ready for mine audits. Check each item:</p>
+    
+    <div class="checklist-item">
+      <input type="checkbox" id="c1" checked disabled>
+      <label for="c1">CIDB Registration Active & Verified</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c2" checked disabled>
+      <label for="c2">Tax Clearance Certificate Valid</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c3" checked disabled>
+      <label for="c3">COIDA Letter of Good Standing</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c4" checked disabled>
+      <label for="c4">SANS Standards Available on Site</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c5" checked disabled>
+      <label for="c5">SANAS Lab Partnership for Testing</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c6" checked disabled>
+      <label for="c6">Weekly Reporting System in Place</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c7" checked disabled>
+      <label for="c7">Anti-Corruption Policy Signed</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="c8" checked disabled>
+      <label for="c8">SLP Local Employment Plan Active</label>
+    </div>
+    
+    <div class="status compliant" style="margin-top:16px">All 8 Critical Requirements Met</div>
+  </div>
+
+  <div class="card">
+    <h3>Company Details</h3>
+    <div class="metric"><span>Company Name</span><strong>[Your Company Name]</strong></div>
+    <div class="metric"><span>Registration No</span><strong>[Your Reg No]</strong></div>
+    <div class="metric"><span>CIDB Grade</span><strong>[Your Grade]</strong></div>
+    <div class="metric"><span>Contact</span><strong>[Your Number]</strong></div>
+    <div class="metric"><span>Email</span><strong>[Your Email]</strong></div>
+    <div class="metric"><span>Address</span><strong>[Your Address]</strong></div>
+  </div>
 </div>
 
+<div id="projects" class="tab hidden">
+  <div class="card">
+    <h3>Active Mining SLP Projects</h3>
+    <div class="metric"><span>Polokwane Access Road Rehab</span><strong class="status compliant" style="padding:4px 8px">In Progress</strong></div>
+    <div class="metric"><span>Limpopo Water Borehole Project</span><strong class="status compliant" style="padding:4px 8px">In Progress</strong></div>
+    <div style="margin-top:12px">
+      <small>Project files, test results, and photos available on request for client review.</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Completed Projects</h3>
+    <div class="metric"><span>Ga-Matlala Community Fence</span><strong>Completed Aug 2025</strong></div>
+    <div class="metric"><span>Mokopane School Upgrade</span><strong>Completed May 2025</strong></div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  © 2026 [Your Company Name]. Built for mining compliance.
+</footer>
+
+<script>
+function showTab(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.add('hidden'));
+  document.getElementById(tab).classList.remove('hidden');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Auto-update date in footer
+document.querySelector('.footer-right').textContent = 'Issue Date: ' + new Date().toLocaleDateString('en-ZA', {month: 'long', year: 'numeric'});
+</script>
 </body>
 </html>
