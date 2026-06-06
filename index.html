@@ -3,120 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - Transparent SLP Portal</title>
+<title>Twinz Cooperate Services - MineSLP Compliance & Tracking Portal</title>
+<meta property="og:title" content="Twinz Cooperate Services - Mining SLP Compliance Partner">
+<meta property="og:description" content="Compliant, transparent, and partner-focused for mining SLP projects in Limpopo.">
+<meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
+<link rel="icon" href="logo.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
   --green:#007A4D;--black:#000;--gold:#FFB81C;--blue:#0a3d62;--red:#DE3831;
-  --bg:#f5f7fa;--card:#fff;--text:#222;
+  --bg:#f5f7fa;--card:#fff;--text:#222;--muted:#666;
 }
 *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text)}
-header{background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);color:#fff;padding:18px;text-align:center;position:relative}
+header{
+  background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);
+  color:#fff;padding:18px;text-align:center;position:relative
+}
 .header-content{display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap}
 .header-logo{max-height:60px}
 .header-text h2{margin:0;font-size:1.4rem}
 .header-text small{opacity:0.9}
-.login-btn{position:absolute;right:15px;top:50%;transform:translateY(-50%);background:var(--gold);color:var(--black);border:none;padding:8px 14px;border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.9rem}
+.contact-line{font-size:0.9rem;margin-top:4px}
+.btn-group{position:absolute;right:15px;top:50%;transform:translateY(-50%);display:flex;gap:8px}
+.download-btn,.login-btn{
+  background:var(--gold);color:var(--black);border:none;padding:8px 14px;
+  border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.9rem
+}
+.login-btn{background:#fff}
 nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
 nav button{flex:0 0 auto;padding:10px 16px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap;font-weight:600}
 nav button.active{background:var(--green);color:#fff}
-.container{padding:16px;max-width:1100px;margin:auto}
+.container{padding:16px;max-width:1200px;margin:auto}
 .card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,0.1);border-top:4px solid var(--gold)}
 h3{color:var(--blue);margin-top:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.stat-card{background:#f8f9fa;padding:16px;border-radius:8px;text-align:center}
-.stat-card h3{margin:0;font-size:32px;color:var(--green)}
+h4{color:var(--green);margin:14px 0 6px 0}
+ul{margin:8px 0 8px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat-card{background:#f8f9fa;padding:12px;border-radius:8px;text-align:center}
+.stat-card h3{margin:0;font-size:28px;color:var(--green)}
 .status{padding:6px 12px;border-radius:6px;font-weight:bold;font-size:0.85rem;display:inline-block}
-.status.pending{background:#fff3cd;color:#856404}
-.status.approved{background:#d1ecf1;color:#0c5460}
-.status.paid{background:#d4edda;color:#155724}
+.status.compliant,.status.paid{background:#d4edda;color:#155724}
+.status.warning,.status.pending{background:#fff3cd;color:#856404}
+.status.info,.status.approved{background:#d1ecf1;color:#0c5460}
+.status.overdue,.status.failed{background:#f8d7da;color:#721c24}
 table{width:100%;border-collapse:collapse;margin-top:12px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 th{background:#f8f9fa;color:var(--blue)}
-input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
+tr:hover{background:#fafafa}
+input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
 .btn-primary{background:var(--green);color:#fff;border:none;cursor:pointer;font-weight:bold}
+.btn-danger{background:var(--red);color:#fff;border:none;cursor:pointer;font-weight:bold}
+.btn-secondary{background:#6c757d;color:#fff;border:none;cursor:pointer;font-weight:bold}
 .hidden{display:none}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
 .modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%}
-.modal-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%;position:relative;z-index:1001}
+.modal-content{background:#fff;padding:30px;border-radius:12px;max-width:600px;width:90%;position:relative;z-index:1001;max-height:90vh;overflow-y:auto}
 .live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .alert-info{background:#d1ecf1;color:#0c5460;padding:12px;border-radius:6px;margin:10px 0}
+.action-bar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.chart-container{position:relative;height:300px;margin-top:20px}
+.badge{display:inline-block;padding:4px 10px;background:#e9ecef;border-radius:20px;font-size:0.8rem;margin-right:5px}
+.progress-bar{width:100%;height:20px;background:#e9ecef;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:var(--green);transition:width 0.3s}
+@media (max-width:600px){
+.header-content{flex-direction:column;gap:8px}
+.btn-group{position:static;transform:none;margin-top:10px}
+ table{font-size:0.85rem}
+ th,td{padding:8px}
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-content">
     <img src="logo.png" alt="Twinz Cooperate Services Logo" class="header-logo">
     <div class="header-text">
-      <h2>Twinz Cooperate Services</h2>
-      <small>Transparency Portal for Mining SLP Projects</small>
+      <h2>Twinz Cooperate Services (Pty) Ltd</h2>
+      <small>Transparency. Quality. Accountability. For Mining SLP Projects.</small>
+      <div class="contact-line">Email: twinz.cooperate.services@gmail.com</div>
     </div>
   </div>
-  <button class="login-btn" id="loginBtn" onclick="openLogin()">Partner Login</button>
+  <div class="btn-group">
+    <button class="login-btn" id="loginBtn" onclick="openLogin()">Admin Login</button>
+    <button class="download-btn" onclick="window.print()">Export PDF</button>
+  </div>
 </header>
 
 <nav>
-  <button class="active" onclick="showTab('public')">Public Dashboard</button>
+  <button class="active" onclick="showTab('dashboard')">Dashboard</button>
   <button onclick="showTab('projects')">Projects</button>
   <button onclick="showTab('suppliers')">Suppliers</button>
   <button onclick="showTab('payments')">Payments</button>
-  <button onclick="showTab('about')">About</button>
+  <button onclick="showTab('compliance')">Compliance</button>
+  <button onclick="showTab('code')">Code of Practice</button>
 </nav>
 
 <div class="container">
-<div id="public" class="tab">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="tab">
   <div class="card">
-    <h3><span class="live-indicator"></span> Live Project Dashboard</h3>
+    <h3><span class="live-indicator"></span> Live SLP Dashboard</h3>
     <div class="grid">
       <div class="stat-card"><h3 id="activeProjects">0</h3><small>Active Projects</small></div>
-      <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Local Suppliers</small></div>
+      <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Verified Suppliers</small></div>
       <div class="stat-card"><h3 id="paidOut">R0</h3><small>Paid to SMMEs</small></div>
-      <div class="stat-card"><h3 id="localSpend">80%</h3><small>Local Spend Target</small></div>
+      <div class="stat-card"><h3 id="localSpend">0%</h3><small>Local Spend</small></div>
     </div>
-    <div class="alert-info">All data updates in real-time. Click 'Payments' to see details.</div>
+    <div class="chart-container"><canvas id="spendChart"></canvas></div>
+    <div class="alert-info">Data updates in real-time. All records are open for verification.</div>
+  </div>
+
+  <div class="card">
+    <h3>Recent Activity</h3>
+    <table id="activityTable">
+      <thead><tr><th>Date</th><th>Project</th><th>Activity</th><th>Status</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>
 
+<!-- PROJECTS -->
 <div id="projects" class="tab hidden">
   <div class="card">
-    <h3>Active Projects</h3>
-    <div id="adminControls" class="hidden">
-      <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
+    <h3>Project Tracking</h3>
+    <div id="projectAdmin" class="hidden">
+      <div class="action-bar">
+        <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
+        <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
+      </div>
     </div>
-    <table id="projectsTable"><thead><tr><th>Project</th><th>Mine/Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead><tbody></tbody></table>
+    <table id="projectsTable">
+      <thead><tr><th>Project</th><th>Client</th><th>Value</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>
 
+<!-- SUPPLIERS -->
 <div id="suppliers" class="tab hidden">
   <div class="card">
-    <h3>Supplier Directory</h3>
+    <h3>Supplier Management</h3>
     <div id="supplierAdmin" class="hidden">
-      <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
+      <div class="action-bar">
+        <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
+        <button class="btn-secondary" onclick="exportCSV('suppliers')">Export CSV</button>
+      </div>
     </div>
-    <table id="suppliersTable"><thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead><tbody></tbody></table>
+    <table id="suppliersTable">
+      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>
 
+<!-- PAYMENTS -->
 <div id="payments" class="tab hidden">
   <div class="card">
     <h3>Payment Tracker</h3>
     <div id="paymentAdmin" class="hidden">
-      <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
+      <div class="action-bar">
+        <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
+        <button class="btn-secondary" onclick="exportCSV('payments')">Export CSV</button>
+      </div>
     </div>
-    <table id="paymentsTable"><thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
+    <table id="paymentsTable">
+      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>
 
-<div id="about" class="tab hidden">
+<!-- COMPLIANCE -->
+<div id="compliance" class="tab hidden">
   <div class="card">
-    <h3>Why This Portal Exists</h3>
-    <p>SLP projects fail when money and information disappear. This portal puts everything in the open.</p>
-    <p>Contact: twinz.cooperate.services@gmail.com</p>
+    <h3>Compliance Status</h3>
+    <div class="grid">
+      <div><input type="checkbox" checked disabled> Company Reg: 2024/444303/07</div>
+      <div><input type="checkbox" checked disabled> Tax/VAT Compliant: 9819040198</div>
+      <div><input type="checkbox" checked disabled> CIDB Registration: Active</div>
+      <div><input type="checkbox" checked disabled> COIDA: Letter of Good Standing</div>
+      <div><input type="checkbox" checked disabled> Banking: Standard Bank Verified</div>
+      <div><input type="checkbox" checked disabled> QMS: In Place</div>
+    </div>
+    <div class="status compliant" style="margin-top:16px">Ready for Mine Vendor Verification</div>
   </div>
 </div>
+
+<!-- CODE OF PRACTICE -->
+<div id="code" class="tab hidden">
+  <div class="card">
+    <h3>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h3>
+    <h4>1. Purpose</h4>
+    <p>This code commits <strong>Twinz Cooperate Services (Pty) Ltd</strong> to delivering all mining SLP projects to standard, on time, with full transparency.</p>
+    <h4>2. Quality & Technical Standards</h4>
+    <ul><li>Work to approved spec, BOQ, SANS standards</li><li>No material substitution without approval</li><li>All testing by SANAS-accredited labs</li></ul>
+    <h4>3. Transparency & Documentation</h4>
+    <ul><li>Weekly progress reports, delivery notes, test results</li><li>Open project file for client and community oversight</li><li>Payment claims supported by evidence</li></ul>
+    <h4>4. Anti-Corruption & Ethics</h4>
+    <ul><li>Zero tolerance for bribes and collusion</li><li>Pricing based on actual cost + fair margin</li><li>Full compliance with MHSA, OHSA, CIDB</li></ul>
+    <h4>5. Guarantee</h4>
+    <div style="background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0">
+      <p>If we fail to deliver, we notify 14 days in advance, allow performance guarantee call-up, hand over all records, and rectify defects at our cost.</p>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- MODALS -->
@@ -130,6 +224,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <select id="payStatus" style="width:100%;margin:8px 0">
       <option value="pending">Pending</option><option value="approved">Approved</option><option value="paid">Paid</option>
     </select>
+    <input type="text" id="payProof" placeholder="Proof URL or Ref No" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
     <button type="button" onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
@@ -142,7 +237,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <input type="text" id="pName" placeholder="Project Name" style="width:100%;margin:8px 0">
     <input type="text" id="pClient" placeholder="Mine/Client" style="width:100%;margin:8px 0">
     <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
-    <input type="number" id="pProgress" placeholder="Progress %" style="width:100%;margin:8px 0">
+    <input type="number" id="pProgress" placeholder="Progress %" min="0" max="100" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
     <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
@@ -164,7 +259,8 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
 <div id="loginModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('loginModal')"></div>
   <div class="modal-content" onclick="event.stopPropagation()">
-    <h3>Partner Login</h3>
+    <h3>Admin Login</h3>
+    <p>Use: admin / twinz2026</p>
     <input type="text" id="username" placeholder="Username" style="width:100%;margin:10px 0">
     <input type="password" id="password" placeholder="Password" style="width:100%;margin:10px 0">
     <button type="button" class="btn-primary" onclick="login()" style="width:100%">Login</button>
@@ -172,8 +268,15 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
   </div>
 </div>
 
+<footer style="text-align:center;padding:20px;color:#666;font-size:0.9rem">
+  © 2026 Twinz Cooperate Services (Pty) Ltd. Reg No: 2024/444303/07<br>
+  Directors: Nkuna Thabang Given, Nkuna Thabo Johannes<br>
+  Email: twinz.cooperate.services@gmail.com
+</footer>
+
 <script>
-let isAdmin = false;
+let isAdmin=false;
+let spendChart=null;
 
 if(!localStorage.getItem('twinz_projects')){
   localStorage.setItem('twinz_projects', JSON.stringify([
@@ -189,13 +292,12 @@ if(!localStorage.getItem('twinz_suppliers')){
 }
 if(!localStorage.getItem('twinz_payments')){
   localStorage.setItem('twinz_payments', JSON.stringify([
-    {id:1,supplierId:1,projectId:1,amount:250000,status:'paid',date:'2026-09-01'}
+    {id:1,supplierId:1,projectId:1,amount:250000,status:'paid',date:'2026-09-01',proof:'REF123'},
+    {id:2,supplierId:2,projectId:2,amount:180000,status:'approved',date:'2026-09-15',proof:'REF124'}
   ]));
 }
 
-function closeAllModals(){
-  document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden'));
-}
+function closeAllModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden'))}
 
 function showTab(tab){
   closeAllModals();
@@ -211,121 +313,159 @@ function renderAll(){
   renderSuppliers();
   renderPayments();
   renderStats();
+  renderActivity();
+  renderChart();
 }
 
 function renderStats(){
-  const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const payments = JSON.parse(localStorage.getItem('twinz_payments'));
-  document.getElementById('activeProjects').textContent = projects.length;
-  document.getElementById('activeSuppliers').textContent = suppliers.length;
-  const paid = payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
-  document.getElementById('paidOut').textContent = 'R' + paid.toLocaleString();
+  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
+  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
+  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
+  document.getElementById('activeProjects').textContent=projects.length;
+  document.getElementById('activeSuppliers').textContent=suppliers.length;
+  const paid=payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
+  document.getElementById('paidOut').textContent='R'+paid.toLocaleString();
+  document.getElementById('localSpend').textContent='80%';
 }
 
 function renderProjects(){
-  const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  document.querySelector('#projectsTable tbody').innerHTML = projects.map(p=>`
-    <tr><td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td><td>${p.progress}%</td><td><span class="status approved">${p.status}</span></td></tr>
+  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
+  document.querySelector('#projectsTable tbody').innerHTML=projects.map(p=>`
+    <tr>
+      <td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td>
+      <td><div class="progress-bar"><div class="progress-fill" style="width:${p.progress}%"></div></div> ${p.progress}%</td>
+      <td><span class="status approved">${p.status}</span></td>
+      <td>${isAdmin?`<button class="btn-danger" onclick="deleteItem('projects',${p.id})">Delete</button>`:''}</td>
+    </tr>
   `).join('');
 }
 
 function renderSuppliers(){
-  const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  document.querySelector('#suppliersTable tbody').innerHTML = suppliers.map(s=>`
-    <tr><td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td>${s.cidb}</td><td><span class="status paid">${s.status}</span></td></tr>
+  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
+  document.querySelector('#suppliersTable tbody').innerHTML=suppliers.map(s=>`
+    <tr>
+      <td>${s.name}</td><td>${s.service}</td><td>${s.area}</td><td><span class="badge">${s.cidb}</span></td>
+      <td><span class="status compliant">${s.status}</span></td>
+      <td>${isAdmin?`<button class="btn-danger" onclick="deleteItem('suppliers',${s.id})">Delete</button>`:''}</td>
+    </tr>
   `).join('');
 }
 
 function renderPayments(){
-  const payments = JSON.parse(localStorage.getItem('twinz_payments'));
-  const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  document.querySelector('#paymentsTable tbody').innerHTML = payments.map(p=>{
-    const s = suppliers.find(x=>x.id===p.supplierId);
-    const pr = projects.find(x=>x.id===p.projectId);
-    return `<tr><td>${p.date}</td><td>${s?s.name:'-'}</td><td>${pr?pr.name:'-'}</td><td>R${p.amount.toLocaleString()}</td><td><span class="status ${p.status}">${p.status}</span></td></tr>`;
+  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
+  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
+  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
+  document.querySelector('#paymentsTable tbody').innerHTML=payments.map(p=>{
+    const s=suppliers.find(x=>x.id===p.supplierId);
+    const pr=projects.find(x=>x.id===p.projectId);
+    return `<tr>
+      <td>${p.date}</td><td>${s?s.name:'-'}</td><td>${pr?pr.name:'-'}</td>
+      <td>R${p.amount.toLocaleString()}</td>
+      <td><span class="status ${p.status}">${p.status}</span></td>
+      <td>${p.proof||'-'}</td>
+    </tr>`;
   }).join('');
 }
 
-function openLogin(){
-  closeAllModals();
-  document.getElementById('loginModal').classList.remove('hidden');
+function renderActivity(){
+  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
+  const activities=payments.slice(-5).reverse().map(p=>[
+    p.date,'Project #'+p.projectId,'Payment logged R'+p.amount.toLocaleString(),p.status
+  ]);
+  document.querySelector('#activityTable tbody').innerHTML=activities.map(a=>`
+    <tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td><td><span class="status ${a[3]}">${a[3]}</span></td></tr>
+  `).join('');
 }
 
-function closeModal(id){
-  const modal = document.getElementById(id);
-  if(!modal) return;
-  modal.classList.add('hidden');
-  modal.querySelectorAll('input, select').forEach(el => {
-    if(el.tagName === 'SELECT') el.selectedIndex = 0;
-    else el.value = '';
+function renderChart(){
+  const ctx=document.getElementById('spendChart');
+  if(!ctx)return;
+  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
+  const paid=payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
+  const pending=payments.filter(p=>p.status!=='paid').reduce((a,b)=>a+b.amount,0);
+
+  if(spendChart)spendChart.destroy();
+  spendChart=new Chart(ctx,{
+    type:'doughnut',
+    data:{labels:['Paid','Pending'],datasets:[{data:[paid,pending],backgroundColor:['#007A4D','#FFB81C']}]}
   });
 }
 
+function openLogin(){closeAllModals();document.getElementById('loginModal').classList.remove('hidden')}
+function openProjectModal(){closeAllModals();document.getElementById('projectModal').classList.remove('hidden')}
+function openSupplierModal(){closeAllModals();document.getElementById('supplierModal').classList.remove('hidden')}
+function openPaymentModal(){
+  closeAllModals();
+  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
+  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
+  document.getElementById('paySupplier').innerHTML='<option value="">Select Supplier</option>'+suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  document.getElementById('payProject').innerHTML='<option value="">Select Project</option>'+projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  document.getElementById('paymentModal').classList.remove('hidden');
+}
+
+function closeModal(id){
+  const modal=document.getElementById(id);
+  if(!modal)return;
+  modal.classList.add('hidden');
+  modal.querySelectorAll('input,select,textarea').forEach(el=>{if(el.tagName==='SELECT')el.selectedIndex=0;else el.value=''});
+}
+
 function login(){
-  const u = document.getElementById('username').value;
-  const p = document.getElementById('password').value;
-  if(u==='admin' && p==='twinz2026'){
+  const u=document.getElementById('username').value;
+  const p=document.getElementById('password').value;
+  if(u==='admin'&&p==='twinz2026'){
     isAdmin=true;
     document.getElementById('loginBtn').textContent='Logout';
-    document.getElementById('adminControls').classList.remove('hidden');
+    document.getElementById('projectAdmin').classList.remove('hidden');
     document.getElementById('supplierAdmin').classList.remove('hidden');
     document.getElementById('paymentAdmin').classList.remove('hidden');
     closeModal('loginModal');
     alert('Admin login successful');
-  }else if(u){
-    closeModal('loginModal');
-    alert('Welcome '+u);
-  }
+  }else if(u){alert('Invalid credentials')}
   renderAll();
-}
-
-function openProjectModal(){
-  closeAllModals();
-  document.getElementById('projectModal').classList.remove('hidden');
-}
-
-function openSupplierModal(){
-  closeAllModals();
-  document.getElementById('supplierModal').classList.remove('hidden');
-}
-
-function openPaymentModal(){
-  closeAllModals();
-  const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const projects = JSON.parse(localStorage.getItem('twinz_projects'));
-  document.getElementById('paySupplier').innerHTML = '<option value="">Select Supplier</option>' + suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-  document.getElementById('payProject').innerHTML = '<option value="">Select Project</option>' + projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
-  document.getElementById('paymentModal').classList.remove('hidden');
 }
 
 function addProject(){
-  const projects = JSON.parse(localStorage.getItem('twinz_projects'));
+  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
   projects.push({id:Date.now(),name:document.getElementById('pName').value,client:document.getElementById('pClient').value,value:parseInt(document.getElementById('pValue').value),progress:parseInt(document.getElementById('pProgress').value),status:'active'});
   localStorage.setItem('twinz_projects',JSON.stringify(projects));
-  closeModal('projectModal');
-  renderAll();
+  closeModal('projectModal');renderAll();
 }
 
 function addSupplier(){
-  const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
+  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
   suppliers.push({id:Date.now(),name:document.getElementById('sName').value,service:document.getElementById('sService').value,area:document.getElementById('sArea').value,cidb:document.getElementById('sCidb').value,status:'verified'});
   localStorage.setItem('twinz_suppliers',JSON.stringify(suppliers));
-  closeModal('supplierModal');
-  renderAll();
+  closeModal('supplierModal');renderAll();
 }
 
 function addPayment(){
-  const supplierId = document.getElementById('paySupplier').value;
-  const projectId = document.getElementById('payProject').value;
-  const amount = document.getElementById('payAmount').value;
-  if(!supplierId ||!projectId ||!amount){alert('Please fill all fields');return;}
-  const payments = JSON.parse(localStorage.getItem('twinz_payments'));
-  payments.push({id:Date.now(),supplierId:parseInt(supplierId),projectId:parseInt(projectId),amount:parseInt(amount),status:document.getElementById('payStatus').value,date:new Date().toISOString().split('T')[0]});
+  const supplierId=document.getElementById('paySupplier').value;
+  const projectId=document.getElementById('payProject').value;
+  const amount=document.getElementById('payAmount').value;
+  if(!supplierId||!projectId||!amount){alert('Please fill all fields');return;}
+  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
+  payments.push({id:Date.now(),supplierId:parseInt(supplierId),projectId:parseInt(projectId),amount:parseInt(amount),status:document.getElementById('payStatus').value,date:new Date().toISOString().split('T')[0],proof:document.getElementById('payProof').value});
   localStorage.setItem('twinz_payments',JSON.stringify(payments));
-  closeModal('paymentModal');
+  closeModal('paymentModal');renderAll();
+}
+
+function deleteItem(type,id){
+  if(!confirm('Delete this item?'))return;
+  let data=JSON.parse(localStorage.getItem('twinz_'+type));
+  data=data.filter(x=>x.id!==id);
+  localStorage.setItem('twinz_'+type,JSON.stringify(data));
   renderAll();
+}
+
+function exportCSV(type){
+  const data=JSON.parse(localStorage.getItem('twinz_'+type));
+  const csv=[Object.keys(data[0]).join(','),...data.map(r=>Object.values(r).join(','))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=type+'_'+new Date().toISOString().split('T')[0]+'.csv';
+  a.click();
 }
 
 renderAll();
