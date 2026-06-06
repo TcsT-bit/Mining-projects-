@@ -74,6 +74,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 .download-btn{position:static;transform:none;margin-top:10px}
   table{font-size:0.85rem}
   th,td{padding:8px}
+}
 </style>
 </head>
 <body>
@@ -116,12 +117,12 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 <div id="projects" class="tab hidden">
   <div class="card">
     <h3>Project Tracking</h3>
+    <p>Active SLP projects. Contact us to update project details.</p>
     <div class="action-bar">
-      <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
       <button class="btn-secondary" onclick="exportCSV('projects')">Export CSV</button>
     </div>
     <table id="projectsTable">
-      <thead><tr><th>Project</th><th>Client</th><th>Value</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Project</th><th>Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -177,7 +178,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 </div>
 
-<!-- MODALS - Cancel buttons removed -->
+<!-- MODALS -->
 <div id="paymentModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -190,18 +191,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
     </select>
     <input type="text" id="payProof" placeholder="Proof URL or Ref No" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
-  </div>
-</div>
-
-<div id="projectModal" class="modal hidden">
-  <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <h3>Add Project</h3>
-    <input type="text" id="pName" placeholder="Project Name" style="width:100%;margin:8px 0">
-    <input type="text" id="pClient" placeholder="Mine/Client" style="width:100%;margin:8px 0">
-    <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
-    <input type="number" id="pProgress" placeholder="Progress %" min="0" max="100" style="width:100%;margin:8px 0">
-    <button type="button" class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
   </div>
 </div>
 
@@ -264,7 +253,6 @@ function renderProjects(){
       <td>${p.name}</td><td>${p.client}</td><td>R${p.value.toLocaleString()}</td>
       <td><div class="progress-bar"><div class="progress-fill" style="width:${p.progress}%"></div></div> ${p.progress}%</td>
       <td><span class="status approved">${p.status}</span></td>
-      <td><button class="btn-danger" onclick="deleteItem('projects',${p.id})">Delete</button></td>
     </tr>
   `).join('');
 }
@@ -309,7 +297,6 @@ function renderChart(){
   });
 }
 
-function openProjectModal(){closeAllModals();document.getElementById('projectModal').classList.remove('hidden')}
 function openPaymentModal(){
   closeAllModals();
   const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
@@ -324,13 +311,6 @@ function closeModal(id){
   if(!modal)return;
   modal.classList.add('hidden');
   modal.querySelectorAll('input,select,textarea').forEach(el=>{if(el.tagName==='SELECT')el.selectedIndex=0;else el.value=''});
-}
-
-function addProject(){
-  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
-  projects.push({id:Date.now(),name:document.getElementById('pName').value,client:document.getElementById('pClient').value,value:parseInt(document.getElementById('pValue').value),progress:parseInt(document.getElementById('pProgress').value),status:'active'});
-  localStorage.setItem('twinz_projects',JSON.stringify(projects));
-  closeModal('projectModal');renderAll();
 }
 
 function addPayment(){
