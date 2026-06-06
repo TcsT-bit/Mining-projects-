@@ -177,7 +177,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 
 </div>
 
-<!-- MODALS -->
+<!-- MODALS - Cancel buttons removed -->
 <div id="paymentModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -190,7 +190,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
     </select>
     <input type="text" id="payProof" placeholder="Proof URL or Ref No" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
-    <button type="button" onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
@@ -203,7 +202,6 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
     <input type="number" id="pValue" placeholder="Value R" style="width:100%;margin:8px 0">
     <input type="number" id="pProgress" placeholder="Progress %" min="0" max="100" style="width:100%;margin:8px 0">
     <button type="button" class="btn-primary" onclick="addProject()" style="width:100%">Save Project</button>
-    <button type="button" onclick="closeModal('projectModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
