@@ -4,61 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twinz Cooperate Services - Transparent SLP Portal</title>
-<meta property="og:title" content="Twinz Cooperate Services - Transparent SLP Portal">
-<meta property="og:description" content="See projects, suppliers, and payments in real-time. No hidden deals.">
-<meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
-<link rel="icon" href="logo.png">
 <style>
 :root{
-  --green:#007A4D;
-  --black:#000;
-  --gold:#FFB81C;
-  --blue:#0a3d62;
-  --red:#DE3831;
-  --bg:#f5f7fa;
-  --card:#fff;
-  --text:#222;
+  --green:#007A4D;--black:#000;--gold:#FFB81C;--blue:#0a3d62;--red:#DE3831;
+  --bg:#f5f7fa;--card:#fff;--text:#222;
 }
 *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text)}
-header{
-  background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);
-  color:#fff;
-  padding:18px;
-  text-align:center;
-  position:relative
-}
+header{background:linear-gradient(90deg, var(--black) 0%, var(--blue) 50%, var(--green) 100%);color:#fff;padding:18px;text-align:center;position:relative}
 .header-content{display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap}
 .header-logo{max-height:60px}
 .header-text h2{margin:0;font-size:1.4rem}
 .header-text small{opacity:0.9}
-.login-btn{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  background:var(--gold);
-  color:var(--black);
-  border:none;
-  padding:8px 14px;
-  border-radius:6px;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:0.9rem
-}
-nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.login-btn{position:absolute;right:15px;top:50%;transform:translateY(-50%);background:var(--gold);color:var(--black);border:none;padding:8px 14px;border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.9rem}
+nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
 nav button{flex:0 0 auto;padding:10px 16px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap;font-weight:600}
 nav button.active{background:var(--green);color:#fff}
 .container{padding:16px;max-width:1100px;margin:auto}
-.card{
-  background:var(--card);
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.1);
-  border-top:4px solid var(--gold)
-}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,0.1);border-top:4px solid var(--gold)}
 h3{color:var(--blue);margin-top:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .stat-card{background:#f8f9fa;padding:16px;border-radius:8px;text-align:center}
@@ -79,9 +43,6 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
 .live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .alert-info{background:#d1ecf1;color:#0c5460;padding:12px;border-radius:6px;margin:10px 0}
-@media (max-width:768px){
-  table{font-size:0.85rem}
-  th,td{padding:8px}
 </style>
 </head>
 <body>
@@ -106,7 +67,6 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
 </nav>
 
 <div class="container">
-
 <div id="public" class="tab">
   <div class="card">
     <h3><span class="live-indicator"></span> Live Project Dashboard</h3>
@@ -114,7 +74,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
       <div class="stat-card"><h3 id="activeProjects">0</h3><small>Active Projects</small></div>
       <div class="stat-card"><h3 id="activeSuppliers">0</h3><small>Local Suppliers</small></div>
       <div class="stat-card"><h3 id="paidOut">R0</h3><small>Paid to SMMEs</small></div>
-      <div class="stat-card"><h3 id="localSpend">0%</h3><small>Local Spend Target</small></div>
+      <div class="stat-card"><h3 id="localSpend">80%</h3><small>Local Spend Target</small></div>
     </div>
     <div class="alert-info">All data updates in real-time. Click 'Payments' to see details.</div>
   </div>
@@ -126,10 +86,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <div id="adminControls" class="hidden">
       <button class="btn-primary" onclick="openProjectModal()">+ Add Project</button>
     </div>
-    <table id="projectsTable">
-      <thead><tr><th>Project</th><th>Mine/Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <table id="projectsTable"><thead><tr><th>Project</th><th>Mine/Client</th><th>Value</th><th>Progress</th><th>Status</th></tr></thead><tbody></tbody></table>
   </div>
 </div>
 
@@ -139,10 +96,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <div id="supplierAdmin" class="hidden">
       <button class="btn-primary" onclick="openSupplierModal()">+ Add Supplier</button>
     </div>
-    <table id="suppliersTable">
-      <thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <table id="suppliersTable"><thead><tr><th>Company</th><th>Service</th><th>Area</th><th>CIDB</th><th>Status</th></tr></thead><tbody></tbody></table>
   </div>
 </div>
 
@@ -152,10 +106,7 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <div id="paymentAdmin" class="hidden">
       <button class="btn-primary" onclick="openPaymentModal()">+ Log Payment</button>
     </div>
-    <table id="paymentsTable">
-      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <table id="paymentsTable"><thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
   </div>
 </div>
 
@@ -166,32 +117,24 @@ input,select,button{padding:10px;border:1px solid #ddd;border-radius:6px;font-si
     <p>Contact: twinz.cooperate.services@gmail.com</p>
   </div>
 </div>
-
 </div>
 
-<!-- PAYMENT MODAL -->
+<!-- MODALS -->
 <div id="paymentModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('paymentModal')"></div>
   <div class="modal-content" onclick="event.stopPropagation()">
     <h3>Log Payment</h3>
-    <select id="paySupplier" style="width:100%;margin:8px 0">
-      <option value="">Select Supplier</option>
-    </select>
-    <select id="payProject" style="width:100%;margin:8px 0">
-      <option value="">Select Project</option>
-    </select>
+    <select id="paySupplier" style="width:100%;margin:8px 0"><option value="">Select Supplier</option></select>
+    <select id="payProject" style="width:100%;margin:8px 0"><option value="">Select Project</option></select>
     <input type="number" id="payAmount" placeholder="Amount R" style="width:100%;margin:8px 0">
     <select id="payStatus" style="width:100%;margin:8px 0">
-      <option value="pending">Pending</option>
-      <option value="approved">Approved</option>
-      <option value="paid">Paid</option>
+      <option value="pending">Pending</option><option value="approved">Approved</option><option value="paid">Paid</option>
     </select>
     <button type="button" class="btn-primary" onclick="addPayment()" style="width:100%">Save Payment</button>
     <button type="button" onclick="closeModal('paymentModal')" style="width:100%;margin-top:10px">Cancel</button>
   </div>
 </div>
 
-<!-- OTHER MODALS -->
 <div id="projectModal" class="modal hidden">
   <div class="modal-overlay" onclick="closeModal('projectModal')"></div>
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -250,7 +193,12 @@ if(!localStorage.getItem('twinz_payments')){
   ]));
 }
 
+function closeAllModals(){
+  document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden'));
+}
+
 function showTab(tab){
+  closeAllModals();
   document.querySelectorAll('.tab').forEach(t=>t.classList.add('hidden'));
   document.getElementById(tab).classList.remove('hidden');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
@@ -273,7 +221,6 @@ function renderStats(){
   document.getElementById('activeSuppliers').textContent = suppliers.length;
   const paid = payments.filter(p=>p.status==='paid').reduce((a,b)=>a+b.amount,0);
   document.getElementById('paidOut').textContent = 'R' + paid.toLocaleString();
-  document.getElementById('localSpend').textContent = '80%';
 }
 
 function renderProjects(){
@@ -301,7 +248,10 @@ function renderPayments(){
   }).join('');
 }
 
-function openLogin(){document.getElementById('loginModal').classList.remove('hidden')}
+function openLogin(){
+  closeAllModals();
+  document.getElementById('loginModal').classList.remove('hidden');
+}
 
 function closeModal(id){
   const modal = document.getElementById(id);
@@ -323,6 +273,7 @@ function login(){
     document.getElementById('supplierAdmin').classList.remove('hidden');
     document.getElementById('paymentAdmin').classList.remove('hidden');
     closeModal('loginModal');
+    alert('Admin login successful');
   }else if(u){
     closeModal('loginModal');
     alert('Welcome '+u);
@@ -330,10 +281,18 @@ function login(){
   renderAll();
 }
 
-function openProjectModal(){document.getElementById('projectModal').classList.remove('hidden')}
-function openSupplierModal(){document.getElementById('supplierModal').classList.remove('hidden')}
+function openProjectModal(){
+  closeAllModals();
+  document.getElementById('projectModal').classList.remove('hidden');
+}
+
+function openSupplierModal(){
+  closeAllModals();
+  document.getElementById('supplierModal').classList.remove('hidden');
+}
 
 function openPaymentModal(){
+  closeAllModals();
   const suppliers = JSON.parse(localStorage.getItem('twinz_suppliers'));
   const projects = JSON.parse(localStorage.getItem('twinz_projects'));
   document.getElementById('paySupplier').innerHTML = '<option value="">Select Supplier</option>' + suppliers.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
