@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - MineSLP Compliance & Tracking Portal</title>
+<title>Twinz Cooperate Services - MineSLP Compliance Partner</title>
+<meta property="og:title" content="Twinz Cooperate Services - Mining SLP Compliance Partner">
+<meta property="og:description" content="Compliant, transparent, and partner-focused for mining SLP projects in Limpopo.">
+<meta property="og:image" content="https://tcst-bit.github.io/Mining-projects-/logo.png">
+<link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
@@ -27,13 +31,15 @@ header{
   background:var(--gold);color:var(--black);border:none;padding:8px 14px;
   border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.9rem
 }
-nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto}
+.download-btn:hover{background:#e6a619}
+nav{display:flex;gap:8px;padding:10px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.05);overflow-x:auto;-webkit-overflow-scrolling:touch}
 nav button{flex:0 0 auto;padding:10px 16px;border:none;border-radius:8px;background:#eee;cursor:pointer;white-space:nowrap;font-weight:600}
 nav button.active{background:var(--green);color:#fff}
 .container{padding:16px;max-width:1200px;margin:auto}
 .card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,0.1);border-top:4px solid var(--gold)}
 h3{color:var(--blue);margin-top:0}
 h4{color:var(--green);margin:14px 0 6px 0}
+ul{margin:8px 0 8px 20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .stat-card{background:#f8f9fa;padding:12px;border-radius:8px;text-align:center}
 .stat-card h3{margin:0;font-size:28px;color:var(--green)}
@@ -45,22 +51,25 @@ table{width:100%;border-collapse:collapse;margin-top:12px}
 th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 th{background:#f8f9fa;color:var(--blue)}
 tr:hover{background:#fafafa}
-input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
-.btn-primary{background:var(--green);color:#fff;border:none;cursor:pointer;font-weight:bold}
-.btn-danger{background:var(--red);color:#fff;border:none;cursor:pointer;font-weight:bold}
-.btn-secondary{background:#6c757d;color:#fff;border:none;cursor:pointer;font-weight:bold}
+.badges{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.badge{padding:8px 14px;border:1px solid #ddd;border-radius:20px;background:#fff;font-weight:bold;font-size:0.85rem}
+.btn-primary{display:inline-block;background:var(--green);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:10px;border:none;cursor:pointer}
+.btn-secondary{background:#6c757d;color:#fff;border:none;cursor:pointer;font-weight:bold;padding:10px 16px;border-radius:6px}
 .hidden{display:none}
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000}
-.modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%}
-.modal-content{background:#fff;padding:30px;border-radius:12px;max-width:600px;width:90%;position:relative;z-index:1001;max-height:90vh;overflow-y:auto}
 .live-indicator{display:inline-block;width:8px;height:8px;background:#28a745;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.alert-info{background:#d1ecf1;color:#0c5460;padding:12px;border-radius:6px;margin:10px 0}
 .action-bar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .chart-container{position:relative;height:300px;margin-top:20px}
-.badge{display:inline-block;padding:4px 10px;background:#e9ecef;border-radius:20px;font-size:0.8rem;margin-right:5px}
 .progress-bar{width:100%;height:20px;background:#e9ecef;border-radius:10px;overflow:hidden}
 .progress-fill{height:100%;background:var(--green);transition:width 0.3s}
+.guarantee-box{background:#f8f9fa;border-left:4px solid var(--green);padding:15px;margin:15px 0}
+.contact-box{background:#f8f9fa;padding:12px;border-radius:8px;margin-top:12px}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+.checklist-item input{width:auto;margin:0}
+.track-record-item{border:1px solid #ddd;border-radius:8px;padding:12px;margin:10px 0}
+.map-container{height:200px;background:#e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#666;margin-top:10px}
+.signature{margin-top:40px}
+.signature div{margin-top:30px;width:300px;border-top:1px solid #000}
 
 @media print {
   header, nav,.download-btn {display:none}
@@ -72,6 +81,7 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
 @media (max-width:600px){
 .header-content{flex-direction:column;gap:8px}
 .download-btn{position:static;transform:none;margin-top:10px}
+.badges{flex-direction:column;align-items:stretch}
   table{font-size:0.85rem}
   th,td{padding:8px}
 </style>
@@ -86,14 +96,14 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div class="contact-line">Email: twinz.cooperate.services@gmail.com</div>
     </div>
   </div>
-  <button class="download-btn" onclick="window.print()">Export PDF</button>
+  <button class="download-btn" onclick="window.print()">Download PDF</button>
 </header>
 
 <nav>
   <button class="active" onclick="showTab('dashboard')">Dashboard</button>
   <button onclick="showTab('projects')">Projects</button>
   <button onclick="showTab('suppliers')">Suppliers</button>
-  <button onclick="showTab('payments')">Payments</button>
+  <button onclick="showTab('partners')">Partners</button>
   <button onclick="showTab('compliance')">Compliance</button>
   <button onclick="showTab('code')">Code of Practice</button>
 </nav>
@@ -110,6 +120,31 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
       <div class="stat-card"><h3 id="localSpend">80%</h3><small>Local Spend</small></div>
     </div>
     <div class="chart-container"><canvas id="spendChart"></canvas></div>
+
+    <div class="status info" style="margin-top:15px">
+      New to Mining SLP. Proven in Construction & Infrastructure. Partnering with experienced contractors to de-risk delivery.
+    </div>
+
+    <div class="badges">
+      <div class="badge">CIPC Registered</div>
+      <div class="badge">CIDB Registered</div>
+      <div class="badge">Tax Compliant</div>
+      <div class="badge">COIDA Active</div>
+    </div>
+
+    <div class="map-container">
+      Based in Limpopo. Projects in Capricorn & Waterberg Districts
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Why Mines & Contractors Work With Us</h3>
+    <ul>
+      <li><strong>Zero Legacy Issues:</strong> No blacklisting, no failed projects, no corruption history</li>
+      <li><strong>Systems First:</strong> Processes built around transparency from day 1</li>
+      <li><strong>Risk Covered:</strong> Performance guarantee and completion commitment in every contract</li>
+      <li><strong>Local Focus:</strong> Prioritize local labor and SMME partnerships per SLP targets</li>
+    </ul>
   </div>
 </div>
 
@@ -141,37 +176,129 @@ input,select,button,textarea{padding:10px;border:1px solid #ddd;border-radius:6p
   </div>
 </div>
 
-<div id="payments" class="tab hidden">
+<div id="partners" class="tab hidden">
   <div class="card">
-    <h3>Payment Tracker</h3>
-    <p>All payments are logged by admin. Contact us to update records.</p>
-    <div class="action-bar">
-      <button class="btn-secondary" onclick="exportCSV('payments')">Export CSV</button>
+    <h3>Partner with Twinz on Mining SLP Projects</h3>
+    <p>We win SLP tenders and subcontract delivery to experienced contractors. You focus on execution, we handle the mine interface, compliance, and admin.</p>
+
+    <h4>Why contractors work with us</h4>
+    <ul>
+      <li><strong>Steady pipeline:</strong> We only bid on SLP projects in Limpopo.</li>
+      <li><strong>Fast payment:</strong> 14 days after mine payment clears.</li>
+      <li><strong>Clean scope:</strong> Clear BOQ split. No surprises, no scope creep.</li>
+      <li><strong>No client poaching:</strong> We’re not building a direct client list. We’re your SLP partner.</li>
+    </ul>
+
+    <h4>What we subcontract</h4>
+    <div class="grid">
+      <div class="stat-card"><strong>Civil Works</strong><br><small>Roads, fencing, structures</small></div>
+      <div class="stat-card"><strong>Water & Sanitation</strong><br><small>Boreholes, pipelines</small></div>
+      <div class="stat-card"><strong>Building</strong><br><small>Community facilities</small></div>
+      <div class="stat-card"><strong>Maintenance</strong><br><small>Ongoing SLP work</small></div>
     </div>
-    <table id="paymentsTable">
-      <thead><tr><th>Date</th><th>Supplier</th><th>Project</th><th>Amount</th><th>Status</th><th>Proof</th></tr></thead>
-      <tbody></tbody>
-    </table>
+
+    <h4>Get on our subcontractor list</h4>
+    <p>Email us at <strong>twinz.cooperate.services@gmail.com</strong> with:</p>
+    <ul>
+      <li>CIDB grade and certificate</li>
+      <li>Past project list with references</li>
+      <li>Plant and crew capacity</li>
+      <li>COIDA and tax compliance</li>
+    </ul>
+
+    <div class="status info">We respond within 48 hours to qualified partners.</div>
+
+    <a href="#" class="btn-primary" onclick="alert('Upload a 1-page Subcontractor Pack PDF as subcontractor-pack.pdf and replace this link')">Download Subcontractor Pack</a>
   </div>
 </div>
 
 <div id="compliance" class="tab hidden">
   <div class="card">
-    <h3>Compliance Status</h3>
-    <div class="grid">
-      <div><input type="checkbox" checked disabled> Company Reg: 2024/444303/07</div>
-      <div><input type="checkbox" checked disabled> Tax/VAT Compliant: 9819040198</div>
-      <div><input type="checkbox" checked disabled> CIDB Registration: Active</div>
-      <div><input type="checkbox" checked disabled> COIDA: Letter of Good Standing</div>
+    <h3>Compliance Status - Twinz Cooperate Services (Pty) Ltd</h3>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Company Registered: 2024/444303/07</label>
     </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Tax/VAT Compliant: 9819040198</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>CIDB Registration: [Add CIDB No]</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>COIDA Letter of Good Standing: Available</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Banking: Standard Bank Acc 10 26 459 443 4, Branch 006145</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" checked disabled>
+      <label>Quality Management System: In Place</label>
+    </div>
+
     <div class="status compliant" style="margin-top:16px">Ready for Mine Vendor Verification</div>
   </div>
 </div>
 
 <div id="code" class="tab hidden">
   <div class="card">
-    <h3>Mining SLP Projects – Code of Practice</h3>
-    <p>This code commits <strong>Twinz Cooperate Services (Pty) Ltd</strong> to delivering all mining SLP projects to standard, on time, with full transparency.</p>
+    <h3>Mining SLP Projects – Contractor Code of Practice & Quality Commitment</h3>
+
+    <h4>1. Purpose</h4>
+    <p>This code commits <strong>Twinz Cooperate Services (Pty) Ltd</strong> to delivering all mining Social Labour Plan and community projects to the required standard, on time, and with full transparency.</p>
+
+    <h4>2. Quality & Technical Standards</h4>
+    <ul>
+      <li>Work executed to approved specification, BOQ, and SANS standards</li>
+      <li>No material substitution without written approval</li>
+      <li>All testing by SANAS-accredited labs. Failed tests rectified at our cost</li>
+    </ul>
+
+    <h4>3. Transparency & Documentation</h4>
+    <ul>
+      <li>Weekly progress reports, delivery notes, test results, site diaries submitted</li>
+      <li>Open project file for client and community oversight</li>
+      <li>Payment claims supported by evidence of work done</li>
+    </ul>
+
+    <h4>4. Anti-Corruption & Ethics</h4>
+    <ul>
+      <li>Zero tolerance for bribes and collusion. Report any attempt immediately</li>
+      <li>Pricing based on actual cost + fair margin. No underbidding to cut corners</li>
+      <li>Full compliance with MHSA, OHSA, CIDB regulations</li>
+    </ul>
+
+    <h4>5. Project Delivery & Accountability</h4>
+    <ul>
+      <li>14-day notice + recovery plan if cash flow issues arise</li>
+      <li>Accept standard retention and 12-month defects liability</li>
+      <li>All compliance docs open for verification</li>
+    </ul>
+
+    <h4>6. Tender Guarantee & Failure Response</h4>
+    <div class="guarantee-box">
+      <p><strong>Our Commitment:</strong> If we fail to deliver, we will:</p>
+      <ul>
+        <li>Notify client 14 days in advance with written recovery plan</li>
+        <li>Allow client to call on performance guarantee/retention to complete work</li>
+        <li>Hand over all completed work and records for continuity</li>
+        <li>Cover cost of rectifying defective work in defects liability period</li>
+      </ul>
+    </div>
+
+    <div class="signature">
+      <div>Signed: ___________________</div>
+      <p>Date: ___________________<br>
+      Director: Nkuna Thabang Given<br>
+      Director: Nkuna Thabo Johannes<br>
+      Twinz Cooperate Services (Pty) Ltd<br>
+      CIDB No: [Add CIDB No]</p>
+    </div>
   </div>
 </div>
 
@@ -212,10 +339,7 @@ if(!localStorage.getItem('twinz_payments')){
   localStorage.setItem('twinz_payments', JSON.stringify([]));
 }
 
-function closeAllModals(){document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden'))}
-
 function showTab(tab){
-  closeAllModals();
   document.querySelectorAll('.tab').forEach(t=>t.classList.add('hidden'));
   document.getElementById(tab).classList.remove('hidden');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
@@ -226,7 +350,6 @@ function showTab(tab){
 function renderAll(){
   renderProjects();
   renderSuppliers();
-  renderPayments();
   renderStats();
   renderChart();
 }
@@ -265,22 +388,6 @@ function renderSuppliers(){
       <td><span class="status compliant">${s.status}</span></td>
     </tr>
   `).join('');
-}
-
-function renderPayments(){
-  const payments=JSON.parse(localStorage.getItem('twinz_payments'));
-  const suppliers=JSON.parse(localStorage.getItem('twinz_suppliers'));
-  const projects=JSON.parse(localStorage.getItem('twinz_projects'));
-  document.querySelector('#paymentsTable tbody').innerHTML=payments.map(p=>{
-    const s=suppliers.find(x=>x.id===p.supplierId);
-    const pr=projects.find(x=>x.id===p.projectId);
-    return `<tr>
-      <td>${p.date}</td><td>${s?s.name:'-'}</td><td>${pr?pr.name:'-'}</td>
-      <td>R${p.amount.toLocaleString()}</td>
-      <td><span class="status ${p.status}">${p.status}</span></td>
-      <td>${p.proof||'-'}</td>
-    </tr>`;
-  }).join('');
 }
 
 function renderChart(){
